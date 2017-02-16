@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ToDoList</string>
+    <string name="name_label">Name:</string>
+    <string name="previous_btn_text">Previous</string>
+    <string name="next_btn_text">Next</string>
+    <string name="not_available_text">No todos available</string>
+    <string name="edit_todo">Edit Todo</string>
+    <string name="add_todo">Add Todo</string>
+    <string name="add_todo_text">Add Todo</string>
+    <string name="edit_todo_text">Edit Todo</string>
+</resources>
