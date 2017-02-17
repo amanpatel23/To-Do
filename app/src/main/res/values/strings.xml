@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ToDoList</string>
     <string name="name_label">Name:</string>
+    <string name="content_label">Content:</string>
     <string name="previous_btn_text">Previous</string>
     <string name="next_btn_text">Next</string>
     <string name="not_available_text">No todos available</string>
@@ -10,4 +11,9 @@
     <string name="edit_todo_text">Edit Todo</string>
     <string name="todo_name">Todo</string>
     <string name="content">Content</string>
+    <string name="not_important_text">Not Important</string>
+    <string name="important_text">Important</string>
+    <string name="is_completed_text">Completed</string>
+    <string name="date_added_text">Date Added:</string>
+    <string name="due_date_text">Due Date:</string>
 </resources>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
@@ -15,13 +16,13 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:weightSum="1"
             android:id="@+id/todo_linear_layout">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="78dp"
+                android:layout_height="115dp"
                 android:textSize="17dp"
                 android:gravity="center"
                 android:id="@+id/todoName"
@@ -30,8 +31,58 @@
             <TextView
                 android:text="@string/content"
                 android:layout_width="match_parent"
-                android:layout_height="79dp"
-                android:id="@+id/todoContent" />
+                android:layout_height="121dp"
+                android:id="@+id/todoContent"
+                android:layout_weight="0.58" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_weight="0.05">
+
+                <TextView
+                    android:text="@string/date_added_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:id="@+id/date_added"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="@string/due_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:id="@+id/due_date"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0.35">
+
+                <Switch
+                    android:text="@string/not_important_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/is_importtant_switch"
+                    android:layout_weight="0.04" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.24" />
+
+                <CheckBox
+                    android:text="@string/is_completed_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox2"
+                    android:layout_weight="0.02" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -44,18 +95,19 @@
         android:weightSum="1">
 
         <Button
-            android:text="@string/next_btn_text"
-            android:layout_width="186dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/nextBtn"
-            android:layout_weight="0.41" />
-
-        <Button
             android:text="@string/previous_btn_text"
             android:layout_width="176dp"
             android:layout_height="wrap_content"
             android:id="@+id/prevBtn"
             android:layout_weight="0.55" />
+
+        <Button
+            android:text="@string/next_btn_text"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextBtn"
+            android:layout_weight="0.83" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -64,17 +116,18 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:text="@string/edit_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_todo_button"
+            android:layout_weight="1" />
+
+        <Button
             android:text="@string/add_todo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add_todo_button"
             android:layout_weight="1.11" />
 
-        <Button
-            android:text="@string/edit_todo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_todo_button"
-            android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

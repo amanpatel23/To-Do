@@ -18,5 +18,5 @@ public interface IEditView {
 
     void setInitialFields(EditTodoViewModel viewModel);
 
-    void sendSongBack(Intent intent);
+    void sendTodoBack(Intent intent);
 }

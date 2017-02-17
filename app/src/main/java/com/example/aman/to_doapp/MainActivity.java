@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         todoLayout = (LinearLayout)findViewById(R.id.todo_linear_layout);
         addTodoBtn = (Button)findViewById(R.id.add_todo_button);
         editTodoBtn = (Button) findViewById(R.id.edit_todo_button);
+        
         prevBtn.setOnClickListener(this);
         nextBtn.setOnClickListener(this);
         addTodoBtn.setOnClickListener(this);
