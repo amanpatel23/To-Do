@@ -8,4 +8,6 @@
     <string name="add_todo">Add Todo</string>
     <string name="add_todo_text">Add Todo</string>
     <string name="edit_todo_text">Edit Todo</string>
+    <string name="todo_name">Todo</string>
+    <string name="content">Content</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
@@ -12,27 +13,25 @@
         android:weightSum="1">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
             android:id="@+id/todo_linear_layout">
 
             <TextView
-                android:text="@string/name_label"
-                android:layout_width="81dp"
-                android:layout_height="80dp"
-                android:id="@+id/textView"
-                android:textSize="20dp"
-                android:gravity="center" />
-
-            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="78dp"
                 android:textSize="17dp"
                 android:gravity="center"
                 android:id="@+id/todoName"
-                android:text="todo name" />
+                android:text="@string/todo_name" />
+
+            <TextView
+                android:text="@string/content"
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:id="@+id/todoContent" />
 
         </LinearLayout>
 
@@ -40,33 +39,36 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
         <Button
             android:text="@string/next_btn_text"
-            android:layout_width="179dp"
+            android:layout_width="186dp"
             android:layout_height="wrap_content"
-            android:id="@+id/nextBtn" />
+            android:id="@+id/nextBtn"
+            android:layout_weight="0.41" />
 
         <Button
             android:text="@string/previous_btn_text"
             android:layout_width="176dp"
             android:layout_height="wrap_content"
-            android:id="@+id/prevBtn" />
+            android:id="@+id/prevBtn"
+            android:layout_weight="0.55" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="wrap_content">
 
         <Button
             android:text="@string/add_todo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add_todo_button"
-            android:layout_weight="1" />
+            android:layout_weight="1.11" />
 
         <Button
             android:text="@string/edit_todo"
