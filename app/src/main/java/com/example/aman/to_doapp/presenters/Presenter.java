@@ -61,6 +61,13 @@ public class Presenter implements IPresenter {
     }
 
     @Override
+    public void markCurrentTodoCompleted() {
+        Todo todo = getCurrentTodo();
+        todo.setCompleted(!todo.isImportant());
+        view.displayTodo(todo);
+    }
+
+    @Override
     public Todo getNextTodo() {
         return model.getTodos().get(currentTodoIndex+1);
     }

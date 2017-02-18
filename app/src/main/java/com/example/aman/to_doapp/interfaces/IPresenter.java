@@ -13,6 +13,7 @@ public interface IPresenter {
     void moveToNextTodo();
     Todo getCurrentTodo();
     void markCurrentTodoImportant();
+    void markCurrentTodoCompleted();
     Todo getNextTodo();
 
     void showAddOrEditView(Todo todo);

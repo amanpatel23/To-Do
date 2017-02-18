@@ -16,12 +16,13 @@ public class TodoService implements ITodoService {
 
     public TodoService(){
         todos = new ArrayList<>();
-        Todo todo = new Todo("Finish HW", "COSC 431", "2/15/17","2/20/17", false, true);
+        Todo todo = new Todo("Finish HW", "COSC 431", "2/15/17","2/20/17", false, false);
         todos.add(todo);
         todo = new Todo("Project Due", "COSC 412", "2/15/17","5/20/17", true, true);
         todos.add(todo);
         todo = new Todo("Extra Credit", "COSC 457", "2/12/17","5/16/17", false, false);
         todos.add(todo);
+
     }
 
     @Override
