@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         super.onPause();
     }
 
-    /**
-     * Grabs references to all needed widgets and sets click listeners.
-     */
+
     private void bindView() {
         todoNameTv = (TextView) findViewById(R.id.todoName);
         todoContentTv = (TextView) findViewById(R.id.todoContent);
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         todoLayout = (LinearLayout)findViewById(R.id.todo_linear_layout);
         addTodoBtn = (Button)findViewById(R.id.add_todo_button);
         editTodoBtn = (Button) findViewById(R.id.edit_todo_button);
-        
+
         prevBtn.setOnClickListener(this);
         nextBtn.setOnClickListener(this);
         addTodoBtn.setOnClickListener(this);
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
             todoNameTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.normal_text_size));
         }
         todoNameTv.setText(todo.getName());
-        todoContentTv.setText(todo.getContent());
+        todoContentTv.setText(todo.getContents());
     }
 
     @Override
@@ -117,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     public void showEditView() {
         Intent intent = EditTodoActivity.newIntent(this);
         intent.putExtra("NAME", presenter.getCurrentTodo().getName());
-        intent.putExtra("CONTENT", presenter.getCurrentTodo().getContent());
+        intent.putExtra("CONTENT", presenter.getCurrentTodo().getContents());
         intent.putExtra("START_REASON", Constants.EDIT_TODO_REQUEST_CODE);
         startActivityForResult(intent, Constants.EDIT_TODO_REQUEST_CODE);
     }
@@ -126,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
-            Log.d(TAG, data.getStringExtra("NAME") + " " + data.getStringExtra("ARTIST"));
+            Log.d(TAG, data.getStringExtra("NAME") + " " + data.getStringExtra("CONTENT"));
         }
     }
 }

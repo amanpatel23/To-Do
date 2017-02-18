@@ -10,3 +10,8 @@ public interface IEditModel {
     void setContents(String text);
 
 }
+
+
+/*
+Add due date and date created to edit and have return to main activity
+ */

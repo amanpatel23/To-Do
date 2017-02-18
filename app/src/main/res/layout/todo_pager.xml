@@ -64,24 +64,23 @@
                 android:layout_height="30dp"
                 android:layout_weight="0.35">
 
-                <Switch
-                    android:text="@string/not_important_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/is_importtant_switch"
-                    android:layout_weight="0.04" />
-
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.24" />
+                    android:layout_weight="0.02" />
 
                 <CheckBox
                     android:text="@string/is_completed_text"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/completed_checkBox"
+                    android:layout_weight="0.00" />
+
+                <Space
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/checkBox2"
                     android:layout_weight="0.02" />
+
             </LinearLayout>
 
         </LinearLayout>
