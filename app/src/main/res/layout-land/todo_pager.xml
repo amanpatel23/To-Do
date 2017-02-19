@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/button_layout_landscape"
+        android:weightSum="1">
+
+        <Button
+            android:text="@string/add_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_todo_button"
+            android:layout_weight="0.25" />
+
+        <Button
+            android:text="@string/edit_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_todo_button"
+            android:layout_weight="0.25" />
+
+        <Button
+            android:text="@string/previous_btn_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prevBtn"
+            android:layout_weight="0.25" />
+
+        <Button
+            android:text="@string/next_btn_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:id="@+id/nextBtn" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/button_layout_landscape"
+        android:id="@+id/todo_relative_layout">
+
+
+        <TextView
+            android:text="@string/date_added_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:id="@+id/date_added_text"
+            android:layout_below="@+id/todoName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="@string/due_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:id="@+id/due_date_text"
+            android:layout_alignBottom="@+id/date_added_text"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="7dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:id="@+id/date_added"
+            android:layout_below="@+id/date_added_text"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:id="@+id/due_date"
+            android:layout_below="@+id/date_added_text"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <CheckBox
+            android:text="@string/is_completed_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/completed_checkBox"
+            android:layout_weight="0.00"
+            android:layout_marginLeft="181dp"
+            android:layout_marginStart="181dp"
+            android:layout_toRightOf="@+id/button_layout_landscape"
+            android:layout_toEndOf="@+id/button_layout_landscape"
+            android:layout_below="@+id/todoContent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textSize="17dp"
+            android:gravity="center"
+            android:id="@+id/todoName"
+            android:text="@string/todo_name"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="@string/content"
+            android:layout_width="match_parent"
+            android:layout_height="121dp"
+            android:id="@+id/todoContent"
+            android:layout_weight="0.43"
+            android:layout_below="@+id/date_added"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:id="@+id/todo_linear_layout"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
