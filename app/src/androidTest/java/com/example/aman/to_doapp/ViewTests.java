@@ -4,7 +4,6 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.aman.to_doapp.interfaces.IPresenter;
-import com.example.aman.to_doapp.interfaces.IView;
 
 import org.junit.Before;
 import org.junit.Rule;
