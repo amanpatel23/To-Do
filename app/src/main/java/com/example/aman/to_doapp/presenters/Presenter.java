@@ -80,5 +80,15 @@ public class Presenter implements IPresenter {
             view.showEditView();
         }
     }
-    
+
+    @Override
+    public void handleNextBtnClick() {
+
+    }
+
+    @Override
+    public void handlePrevBtnClick() {
+
+    }
+
 }

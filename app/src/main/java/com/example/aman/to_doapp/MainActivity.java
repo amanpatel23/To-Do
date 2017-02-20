@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         presenter = new Presenter(this, new TodosModel(new TodoService()));
     }
 
+    public void setPresenter(IPresenter presenter) {
+        this.presenter = presenter;
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -78,9 +82,11 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         switch(view.getId()) {
             case R.id.prevBtn:
                 presenter.moveToPrevTodo();
+                presenter.handlePrevBtnClick();
                 break;
             case R.id.nextBtn:
                 presenter.moveToNextTodo();
+                presenter.handleNextBtnClick();
                 break;
             case R.id.todo_linear_layout:
                 presenter.markCurrentTodoImportant();

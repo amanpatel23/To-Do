@@ -17,4 +17,8 @@ public interface IPresenter {
     Todo getNextTodo();
 
     void showAddOrEditView(Todo todo);
+
+    void handleNextBtnClick();
+
+    void handlePrevBtnClick();
 }

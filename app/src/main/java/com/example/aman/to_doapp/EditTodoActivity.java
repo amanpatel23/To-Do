@@ -51,14 +51,24 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         contentEt = (EditText)findViewById(R.id.contentEditText);
         viewModelTv = (TextView)findViewById(R.id.debug_model);
         saveBtn = (Button)findViewById(R.id.save_button);
-//        saveBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String name = nameEt.getText().toString();
-//                String content = contentEt.getText().toString();
-//                presenter.saveTodo(name, content);
-//            }
-//        });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String name = nameEt.getText().toString();
+                String content = contentEt.getText().toString();
+                String dateCreated = nameEt.getText().toString();
+                String dueDate = contentEt.getText().toString();
+
+                if(name.isEmpty()) {
+                    nameEt.setError("Enter Todo Name");
+                    return;
+                }
+
+              presenter.saveTodo(name, content, dateCreated, dueDate);
+          }
+        });
         saveBtn.setOnClickListener(this);
         nameEt.addTextChangedListener(new TextWatcher() {
             @Override
