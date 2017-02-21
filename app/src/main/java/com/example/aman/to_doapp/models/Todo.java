@@ -14,6 +14,8 @@ public class Todo {
     private boolean isImportant;
 
     public Todo() {}
+
+
     public Todo(String name, String contents, String dateCreated, String dueDate, boolean completed, boolean important){
         this.name = name;
         this.contents = contents;
@@ -76,7 +78,5 @@ public class Todo {
     }
 
     public void setImportant(boolean important) { isImportant = important; }
-
-
 
 }
