@@ -32,6 +32,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     TextView viewModelTv;
     EditText nameEt;
     EditText contentEt;
+    EditText dateCreatedEt;
+    EditText dueDateEt;
     Button saveBtn;
 
     @Override
