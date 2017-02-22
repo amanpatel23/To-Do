@@ -15,7 +15,7 @@ public class EditTodoViewModel {
 
 
     public boolean validate() {
-        return name != null && content != null;
+        return name != null && content != null &&  dateCreated != null && dueDate != null;
     }
 
     public Intent makeIntent() {

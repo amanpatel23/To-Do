@@ -35,14 +35,14 @@ public class EditTodoPresenter implements IEditPresenter {
     }
 
     @Override
-    public void updateTodoContent(String text) {
-        viewModel.content = text;
+    public void updateTodoName(String text) {
+        viewModel.name = text;
         view.updateViewWithViewModel(viewModel);
     }
 
     @Override
-    public void updateTodoName(String text) {
-        viewModel.name = text;
+    public void updateTodoContent(String text) {
+        viewModel.content = text;
         view.updateViewWithViewModel(viewModel);
     }
 
@@ -80,8 +80,8 @@ public class EditTodoPresenter implements IEditPresenter {
     @Override
     public void setViewModel(Intent intent) {
         if(intent.getIntExtra("START_REASON", Constants.ADD_TODO_REQUEST_CODE) == Constants.EDIT_TODO_REQUEST_CODE ) {
-            viewModel.content = intent.getStringExtra("CONTENT");
             viewModel.name = intent.getStringExtra("NAME");
+            viewModel.content = intent.getStringExtra("CONTENT");
             viewModel.dateCreated = intent.getStringExtra("DATE CREATED");
             viewModel.dueDate = intent.getStringExtra("DUE DATE");
             view.updateViewWithViewModel(viewModel);

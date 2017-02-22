@@ -83,7 +83,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 android:text=""
                 android:ems="10"
                 android:id="@+id/dateCreatedEditText"
@@ -106,11 +106,11 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
                 android:text=""
                 android:ems="10"
                 android:id="@+id/dueDateEditText"
-                android:layout_weight="0.7" />
+                android:layout_weight="0.7"
+                android:inputType="date" />
 
         </TableRow>
 

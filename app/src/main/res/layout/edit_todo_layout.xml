@@ -16,7 +16,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="186dp"
-        android:columnCount="2">
+        android:columnCount="2"
+        android:layout_weight="0.69">
 
         <TableRow
             android:layout_width="match_parent"
@@ -83,7 +84,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 android:text=""
                 android:ems="10"
                 android:id="@+id/dateCreatedEditText"
@@ -106,18 +107,13 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 android:text=""
                 android:ems="10"
                 android:id="@+id/dueDateEditText"
                 android:layout_weight="0.7" />
 
         </TableRow>
-
-
-
-
-
 
         <TableRow
             android:layout_width="match_parent"

@@ -153,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         Intent intent = EditTodoActivity.newIntent(this);
         intent.putExtra("NAME", presenter.getCurrentTodo().getName());
         intent.putExtra("CONTENT", presenter.getCurrentTodo().getContents());
+        intent.putExtra("DATE CREATED", presenter.getCurrentTodo().getDateCreated());
+        intent.putExtra("DUE DATE", presenter.getCurrentTodo().getDueDate());
         intent.putExtra("START_REASON", Constants.EDIT_TODO_REQUEST_CODE);
         startActivityForResult(intent, Constants.EDIT_TODO_REQUEST_CODE);
     }
@@ -161,7 +163,8 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
-            Log.d(TAG, data.getStringExtra("NAME") + " " + data.getStringExtra("CONTENT"));
+            Log.d(TAG, data.getStringExtra("NAME") + " " + data.getStringExtra("CONTENT")
+                    + " " + data.getStringExtra("DATE CREATED") + " " + data.getStringExtra("DUE DATE"));
         }
     }
 

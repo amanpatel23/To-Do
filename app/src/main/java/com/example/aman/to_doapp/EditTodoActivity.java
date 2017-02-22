@@ -51,6 +51,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         nameTv = (TextView)findViewById(R.id.name_text);
         nameEt = (EditText)findViewById(R.id.nameEditText);
         contentEt = (EditText)findViewById(R.id.contentEditText);
+        dateCreatedEt = (EditText)findViewById(R.id.dateCreatedEditText);
+        dueDateEt = (EditText)findViewById(R.id.dueDateEditText);
         viewModelTv = (TextView)findViewById(R.id.debug_model);
         saveBtn = (Button)findViewById(R.id.save_button);
 
@@ -60,8 +62,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
             public void onClick(View view) {
                 String name = nameEt.getText().toString();
                 String content = contentEt.getText().toString();
-                String dateCreated = nameEt.getText().toString();
-                String dueDate = contentEt.getText().toString();
+                String dateCreated = dateCreatedEt.getText().toString();
+                String dueDate = dueDateEt.getText().toString();
 
                 if(name.isEmpty()) {
                     nameEt.setError("Enter Todo Name");
@@ -71,7 +73,9 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
               presenter.saveTodo(name, content, dateCreated, dueDate);
           }
         });
+
         saveBtn.setOnClickListener(this);
+
         nameEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -87,6 +91,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 presenter.updateTodoName(editable.toString());
             }
         });
+
         contentEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -99,6 +104,37 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
             @Override
             public void afterTextChanged(Editable editable) {
                 presenter.updateTodoContent(editable.toString());
+            }
+        });
+
+        dateCreatedEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                presenter.updateTodoDateCreated(editable.toString());
+            }
+        });
+
+        dueDateEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                presenter.updateTodoDueDate(editable.toString());
             }
         });
     }
@@ -115,7 +151,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
 
     @Override
     public void updateViewWithViewModel(EditTodoViewModel vm) {
-        viewModelTv.setText("Name: " + vm.name + ", Content: " + vm.content);
+        viewModelTv.setText("Name: " + vm.name + ", Content: " + vm.content
+                + ", Date Created: " + vm.dateCreated + ", Due Date: " + vm.dueDate);
     }
 
     @Override
@@ -134,6 +171,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     public void setInitialFields(EditTodoViewModel viewModel) {
         nameEt.setText(viewModel.name);
         contentEt.setText(viewModel.content);
+        dateCreatedEt.setText(viewModel.dateCreated);
+        dueDateEt.setText(viewModel.dueDate);
     }
 
     @Override

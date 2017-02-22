@@ -19,6 +19,5 @@ public interface IPresenter {
     void showAddOrEditView(Todo todo);
 
     void handleNextBtnClick();
-
     void handlePrevBtnClick();
 }
