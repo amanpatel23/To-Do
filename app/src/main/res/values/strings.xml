@@ -14,8 +14,6 @@
     <string name="not_important_text">Not Important</string>
     <string name="important_text">Important</string>
     <string name="is_completed_text">Completed</string>
-    <string name="date_added_text">Date Added:</string>
-    <string name="due_date_text">Due Date:</string>
     <string name="date_created_label">Date Created:</string>
     <string name="due_date_label">Due Date:</string>
 </resources>

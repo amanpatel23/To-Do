@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     private void bindView() {
         todoNameTv = (TextView) findViewById(R.id.todoName);
         todoContentTv = (TextView) findViewById(R.id.todoContent);
-        todoDateCreated = (TextView) findViewById(R.id.date_added);
+        todoDateCreated = (TextView) findViewById(R.id.date_created);
         todoDueDate = (TextView) findViewById(R.id.due_date);
         prevBtn = (Button) findViewById(R.id.prevBtn);
         nextBtn = (Button) findViewById(R.id.nextBtn);

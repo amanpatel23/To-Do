@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/todo_dueDate"
                 android:textSize="24sp"
-                android:text="@string/content_label"
+                android:text="@string/due_date_label"
                 tools:text="Due Date:"
                 android:textAlignment="textEnd"
                 android:gravity="end"
