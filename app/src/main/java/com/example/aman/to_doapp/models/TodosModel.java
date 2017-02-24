@@ -15,8 +15,6 @@ public class TodosModel implements IModel {
     List<Todo> todos;
 
     public TodosModel(ITodoService todoService) {
-        todos = new ArrayList<>();
-        todos.add(new Todo());
         todos = todoService.getTodos();
     }
 

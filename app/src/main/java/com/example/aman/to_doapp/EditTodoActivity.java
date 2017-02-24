@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.aman.to_doapp.interfaces.IEditPresenter;
 import com.example.aman.to_doapp.interfaces.IEditView;
+import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.models.TodosModel;
 import com.example.aman.to_doapp.presenters.EditTodoPresenter;
 import com.example.aman.to_doapp.services.TodoService;
@@ -41,8 +42,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_todo_layout);
         bindView();
-
-        presenter = new EditTodoPresenter(this, new TodosModel(new TodoService()));
+        ITodoService todoService = TodoService.gettodoService();
+        presenter = new EditTodoPresenter(this, new TodosModel(todoService));
         presenter.showName(getIntent().getIntExtra("START_REASON", Constants.ADD_TODO_REQUEST_CODE));
         presenter.setViewModel(getIntent());
     }

@@ -14,7 +14,12 @@ public class TodoService implements ITodoService {
 
     List<Todo> todos;
 
-    public TodoService(){
+    private static TodoService todoService = new TodoService();
+    public static ITodoService gettodoService() {
+        return todoService;
+    }
+
+    private TodoService(){
         todos = new ArrayList<>();
         Todo todo = new Todo("Finish HW", "COSC 431", "2/15/17","2/20/17", false, false);
         todos.add(todo);

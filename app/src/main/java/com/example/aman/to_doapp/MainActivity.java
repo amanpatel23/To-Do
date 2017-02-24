@@ -2,7 +2,6 @@ package com.example.aman.to_doapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.interfaces.IView;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.models.Todo;
@@ -22,7 +22,6 @@ import com.example.aman.to_doapp.services.TodoService;
 
 public class MainActivity extends AppCompatActivity implements IView, View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
-    private static final String TAG = MainActivity.class.getSimpleName();
 
     IPresenter presenter;
 
@@ -44,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.todo_pager);
         bindView();
-        presenter = new Presenter(this, new TodosModel(new TodoService()));
+        ITodoService todoService = TodoService.gettodoService();
+        presenter = new Presenter(this, new TodosModel(todoService));
     }
 
     public void setPresenter(IPresenter presenter) {
@@ -82,10 +82,12 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         switch(view.getId()) {
             case R.id.prevBtn:
                 presenter.moveToPrevTodo();
+                //For testing
                 presenter.handlePrevBtnClick();
                 break;
             case R.id.nextBtn:
                 presenter.moveToNextTodo();
+                //For testing
                 presenter.handleNextBtnClick();
                 break;
             case R.id.todo_linear_layout:
@@ -162,10 +164,6 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK) {
-            Log.d(TAG, data.getStringExtra("NAME") + " " + data.getStringExtra("CONTENT")
-                    + " " + data.getStringExtra("DATE CREATED") + " " + data.getStringExtra("DUE DATE"));
-        }
     }
 
     @Override
