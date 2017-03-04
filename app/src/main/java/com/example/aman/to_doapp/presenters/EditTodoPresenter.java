@@ -46,11 +46,6 @@ public class EditTodoPresenter implements IEditPresenter {
         view.updateViewWithViewModel(viewModel);
     }
 
-    @Override
-    public void updateTodoDateCreated(String text) {
-        viewModel.dateCreated = text;
-        view.updateViewWithViewModel(viewModel);
-    }
 
     @Override
     public void updateTodoDueDate(String text) {
@@ -68,11 +63,10 @@ public class EditTodoPresenter implements IEditPresenter {
     }
 
     @Override
-    public void saveTodo(String name, String content, String dateCreated, String dueDate) {
+    public void saveTodo(String name, String content,  String dueDate) {
         Intent intent = new Intent();
         intent.putExtra("NAME", name);
         intent.putExtra("CONTENT", content);
-        intent.putExtra("DATE CREATED", dateCreated);
         intent.putExtra("DUE DATE", dueDate);
         view.sendTodoBack(intent);
     }
@@ -82,7 +76,6 @@ public class EditTodoPresenter implements IEditPresenter {
         if(intent.getIntExtra("START_REASON", Constants.ADD_TODO_REQUEST_CODE) == Constants.EDIT_TODO_REQUEST_CODE ) {
             viewModel.name = intent.getStringExtra("NAME");
             viewModel.content = intent.getStringExtra("CONTENT");
-            viewModel.dateCreated = intent.getStringExtra("DATE CREATED");
             viewModel.dueDate = intent.getStringExtra("DUE DATE");
             view.updateViewWithViewModel(viewModel);
             view.setInitialFields(viewModel);

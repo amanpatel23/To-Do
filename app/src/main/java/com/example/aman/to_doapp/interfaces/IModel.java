@@ -10,4 +10,12 @@ import com.example.aman.to_doapp.models.Todo;
 
 public interface IModel {
     List<Todo> getTodos();
+
+    void delete(int position);
+
+    void add(Todo todo);
+
+    void edit(Todo todo);
+
+
 }

@@ -1,7 +1,13 @@
 package com.example.aman.to_doapp.presenters;
 
+import android.content.Intent;
+
 import java.util.List;
 
+import com.example.aman.to_doapp.Constants;
+import com.example.aman.to_doapp.EditTodoActivity;
+import com.example.aman.to_doapp.MainActivity;
+import com.example.aman.to_doapp.interfaces.IEditView;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.interfaces.IModel;
 import com.example.aman.to_doapp.interfaces.IView;
@@ -15,62 +21,48 @@ public class Presenter implements IPresenter {
 
     IModel model;
     IView view;
-    int currentTodoIndex;
 
     public Presenter(IView view, IModel model) {
-        this.model = model;
         this.view = view;
-        currentTodoIndex = 0;
-        view.displayTodo(getCurrentTodo());
+        this.model = model;
     }
 
     @Override
-    public void moveToPrevTodo() {
-        List<Todo> todos = model.getTodos();
-        currentTodoIndex--;
-        if(currentTodoIndex < 0) {
-            currentTodoIndex = todos.size() - 1;
-        }
-        view.displayTodo(getCurrentTodo());
+    public void handleClick(Todo text, int adapterPosition) {
+
     }
 
     @Override
-    public void moveToNextTodo() {
-        List<Todo> todos = model.getTodos();
-        currentTodoIndex++;
-        if(currentTodoIndex >= todos.size()) {
-            currentTodoIndex = 0;
-        }
-        view.displayTodo(getCurrentTodo());
+    public List<Todo> getTodos() {
+        return model.getTodos();
     }
 
     @Override
-    public Todo getCurrentTodo() {
-        List<Todo> Todos = model.getTodos();
-        if(Todos.size() == 0) {
-            return null;
-        }
-        return Todos.get(currentTodoIndex);
+    public void handleLongPress(int position) {
+        model.delete(position);
+        view.handleDelete(position);
     }
 
     @Override
-    public void markCurrentTodoImportant() {
-        Todo todo = getCurrentTodo();
-        todo.setImportant(!todo.isImportant());
-        view.displayTodo(todo);
+    public void handleAddClick() {
+        view.showAddView();
+        model.add(new Todo());
+
     }
 
+    @Override
+    public void handleEditClick(int position) {
+        view.showEditView(position);
+        model.edit(getTodos().get(position));
+    }
+/*
     @Override
     public void markCurrentTodoCompleted() {
-        Todo todo = getCurrentTodo();
+        Todo todo = getTodos();
         todo.setCompleted(!todo.isImportant());
         view.displayTodo(todo);
     }
 
-    @Override
-    public Todo getNextTodo() {
-        return model.getTodos().get(currentTodoIndex+1);
-    }
 
     @Override
     public void showAddOrEditView(Todo todo) {
@@ -80,15 +72,8 @@ public class Presenter implements IPresenter {
             view.showEditView();
         }
     }
+*/
 
-    @Override
-    public void handleNextBtnClick() {
 
-    }
-
-    @Override
-    public void handlePrevBtnClick() {
-
-    }
 
 }

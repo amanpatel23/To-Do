@@ -8,21 +8,18 @@ public class Todo {
 
     private String name;
     private String contents;
-    private String dateCreated;
     private String dueDate;
     private boolean isCompleted;
-    private boolean isImportant;
+
 
     public Todo() {}
 
 
-    public Todo(String name, String contents, String dateCreated, String dueDate, boolean completed, boolean important){
+    public Todo(String name, String contents, String dueDate, boolean completed){
         this.name = name;
         this.contents = contents;
-        this.dateCreated = dateCreated;
         this.dueDate = dueDate;
         this.isCompleted = completed;
-        this.isImportant = important;
     }
 
     public String toString() {
@@ -47,15 +44,6 @@ public class Todo {
     }
 
 
-    public String getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-
     public String getDueDate() {
         return dueDate;
     }
@@ -71,11 +59,5 @@ public class Todo {
         isCompleted = completed;
     }
 
-
-    public boolean isImportant() {
-        return isImportant;
-    }
-
-    public void setImportant(boolean important) { isImportant = important; }
 
 }

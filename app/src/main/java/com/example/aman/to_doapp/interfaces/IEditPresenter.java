@@ -9,12 +9,11 @@ import android.content.Intent;
 public interface IEditPresenter {
 
     void showName(int requestCode);
-    void updateTodoContent(String text);
     void updateTodoName(String text);
-    void updateTodoDateCreated(String text);
+    void updateTodoContent(String text);
     void updateTodoDueDate(String text);
     void validateModel();
-    void saveTodo(String name, String content, String dateCreated, String dueDate);
+    void saveTodo(String name, String content, String dueDate);
 
     void setViewModel(Intent intent);
 }

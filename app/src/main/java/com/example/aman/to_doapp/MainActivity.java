@@ -1,50 +1,53 @@
 package com.example.aman.to_doapp;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.TypedValue;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.content.Intent;
 
+import com.example.aman.to_doapp.adapters.RecyclerAdapter;
 import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.interfaces.IView;
 import com.example.aman.to_doapp.interfaces.IPresenter;
-import com.example.aman.to_doapp.models.Todo;
 import com.example.aman.to_doapp.models.TodosModel;
 import com.example.aman.to_doapp.presenters.Presenter;
 import com.example.aman.to_doapp.services.TodoService;
 
 
-public class MainActivity extends AppCompatActivity implements IView, View.OnClickListener, CompoundButton.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements IView,  CompoundButton.OnCheckedChangeListener{
 
 
     IPresenter presenter;
 
-    // widgets
-    Button prevBtn;
-    Button nextBtn;
-    TextView todoNameTv;
-    TextView todoContentTv;
-    TextView nextTodoTv;
-    TextView todoDateCreated;
-    TextView todoDueDate;
-    LinearLayout todoLayout;
-    Button addTodoBtn;
-    Button editTodoBtn;
-    CheckBox completedCheckBox;
+    RecyclerView recyclerView;
+    RecyclerAdapter adapter;
+    FloatingActionButton floatingActionButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.todo_pager);
-        bindView();
+        setContentView(R.layout.recycler_view);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.handleAddClick();
+            }
+        });
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ITodoService todoService = TodoService.gettodoService();
         presenter = new Presenter(this, new TodosModel(todoService));
+        adapter = new RecyclerAdapter(presenter);
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
     }
 
     public void setPresenter(IPresenter presenter) {
@@ -56,93 +59,6 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         super.onPause();
     }
 
-
-    private void bindView() {
-        todoNameTv = (TextView) findViewById(R.id.todoName);
-        todoContentTv = (TextView) findViewById(R.id.todoContent);
-        todoDateCreated = (TextView) findViewById(R.id.date_created);
-        todoDueDate = (TextView) findViewById(R.id.due_date);
-        prevBtn = (Button) findViewById(R.id.prevBtn);
-        nextBtn = (Button) findViewById(R.id.nextBtn);
-        todoLayout = (LinearLayout)findViewById(R.id.todo_linear_layout);
-        addTodoBtn = (Button)findViewById(R.id.add_todo_button);
-        editTodoBtn = (Button) findViewById(R.id.edit_todo_button);
-        completedCheckBox = (CheckBox) findViewById(R.id.completed_checkBox);
-
-        prevBtn.setOnClickListener(this);
-        nextBtn.setOnClickListener(this);
-        addTodoBtn.setOnClickListener(this);
-        editTodoBtn.setOnClickListener(this);
-        todoLayout.setOnClickListener(this);
-        completedCheckBox.setOnCheckedChangeListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.prevBtn:
-                presenter.moveToPrevTodo();
-                //For testing
-                presenter.handlePrevBtnClick();
-                break;
-            case R.id.nextBtn:
-                presenter.moveToNextTodo();
-                //For testing
-                presenter.handleNextBtnClick();
-                break;
-            case R.id.todo_linear_layout:
-                presenter.markCurrentTodoImportant();
-                break;
-            case R.id.completed_checkBox:
-                presenter.markCurrentTodoCompleted();
-                break;
-            case R.id.add_todo_button:
-                presenter.showAddOrEditView(null);
-                break;
-            case R.id.edit_todo_button:
-                presenter.showAddOrEditView(presenter.getCurrentTodo());
-        }
-    }
-
-    @Override
-    public void displayTodo(Todo todo) {
-        if(todo == null) {
-            todoNameTv.setText(R.string.not_available_text);
-            return;
-        }
-        if(todo.isImportant()) {
-            todoNameTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.important_text_size));
-        }
-        else {
-            todoNameTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.normal_text_size));
-        }
-
-
-        if(todo.isCompleted()) {
-            completedCheckBox.setChecked(true);
-        }
-        else {
-            completedCheckBox.setChecked(false);
-        }
-
-        if(completedCheckBox.isChecked() && todo.isCompleted() == false) {
-            completedCheckBox.setChecked(false);
-        }
-        if(completedCheckBox.isChecked() == false && todo.isCompleted()) {
-            completedCheckBox.setChecked(true);
-        }
-
-        todoNameTv.setText(todo.getName());
-        todoContentTv.setText(todo.getContents());
-        todoDateCreated.setText(todo.getDateCreated());
-        todoDueDate.setText(todo.getDueDate());
-    }
-
-    @Override
-    public void displayNextTodo(Todo todo) {
-        nextTodoTv.setText(todo.getName());
-    }
-
     @Override
     public void showAddView() {
         Intent intent = EditTodoActivity.newIntent(this);
@@ -151,14 +67,30 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     }
 
     @Override
-    public void showEditView() {
+    public void showEditView(int position) {
         Intent intent = EditTodoActivity.newIntent(this);
-        intent.putExtra("NAME", presenter.getCurrentTodo().getName());
-        intent.putExtra("CONTENT", presenter.getCurrentTodo().getContents());
-        intent.putExtra("DATE CREATED", presenter.getCurrentTodo().getDateCreated());
-        intent.putExtra("DUE DATE", presenter.getCurrentTodo().getDueDate());
+        intent.putExtra("NAME", presenter.getTodos().get(position).getName());
+        intent.putExtra("CONTENT", presenter.getTodos().get(position).getContents());
+        intent.putExtra("DUE DATE", presenter.getTodos().get(position).getDueDate());
         intent.putExtra("START_REASON", Constants.EDIT_TODO_REQUEST_CODE);
         startActivityForResult(intent, Constants.EDIT_TODO_REQUEST_CODE);
+    }
+
+
+    @Override
+    public void handleAdd(int i) {
+        adapter.notifyItemInserted(i);
+        recyclerView.scrollToPosition(0);
+    }
+
+    @Override
+    public void handleEdit(int position) {
+        adapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void handleDelete(int position) {
+        adapter.notifyItemRemoved(position);
     }
 
     @Override

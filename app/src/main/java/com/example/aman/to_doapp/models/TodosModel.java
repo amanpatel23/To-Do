@@ -23,5 +23,20 @@ public class TodosModel implements IModel {
         return todos;
     }
 
+    @Override
+    public void delete(int position) {
+        todos.remove(position);
+    }
+
+    @Override
+    public void add(Todo todo) {
+        todos.add(0, todo);
+    }
+
+    @Override
+    public void edit(Todo todo) {
+
+    }
+
 
 }

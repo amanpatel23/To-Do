@@ -33,7 +33,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     TextView viewModelTv;
     EditText nameEt;
     EditText contentEt;
-    EditText dateCreatedEt;
     EditText dueDateEt;
     Button saveBtn;
 
@@ -52,7 +51,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         nameTv = (TextView)findViewById(R.id.name_text);
         nameEt = (EditText)findViewById(R.id.nameEditText);
         contentEt = (EditText)findViewById(R.id.contentEditText);
-        dateCreatedEt = (EditText)findViewById(R.id.dateCreatedEditText);
         dueDateEt = (EditText)findViewById(R.id.dueDateEditText);
         viewModelTv = (TextView)findViewById(R.id.debug_model);
         saveBtn = (Button)findViewById(R.id.save_button);
@@ -63,7 +61,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
             public void onClick(View view) {
                 String name = nameEt.getText().toString();
                 String content = contentEt.getText().toString();
-                String dateCreated = dateCreatedEt.getText().toString();
                 String dueDate = dueDateEt.getText().toString();
 
                 if(name.isEmpty()) {
@@ -71,7 +68,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                     return;
                 }
 
-              presenter.saveTodo(name, content, dateCreated, dueDate);
+              presenter.saveTodo(name, content, dueDate);
           }
         });
 
@@ -108,21 +105,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
             }
         });
 
-        dateCreatedEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                presenter.updateTodoDateCreated(editable.toString());
-            }
-        });
 
         dueDateEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -153,26 +135,28 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     @Override
     public void updateViewWithViewModel(EditTodoViewModel vm) {
         viewModelTv.setText("Name: " + vm.name + ", Content: " + vm.content
-                + ", Date Created: " + vm.dateCreated + ", Due Date: " + vm.dueDate);
+                +  ", Due Date: " + vm.dueDate);
     }
 
     @Override
     public void returnResult(EditTodoViewModel viewModel) {
         Intent intent = viewModel.makeIntent();
+//        presenter.updateTodoName(viewModel.name);
+//        presenter.updateTodoContent(viewModel.content);
+//        presenter.updateTodoDueDate(viewModel.dueDate);
         setResult(RESULT_OK, intent);
         finish();
     }
 
     @Override
     public void displayInvalid(EditTodoViewModel viewModel) {
-        viewModelTv.setText("View model is not valid");
+        viewModelTv.setText("Input is not valid");
     }
 
     @Override
     public void setInitialFields(EditTodoViewModel viewModel) {
         nameEt.setText(viewModel.name);
         contentEt.setText(viewModel.content);
-        dateCreatedEt.setText(viewModel.dateCreated);
         dueDateEt.setText(viewModel.dueDate);
     }
 

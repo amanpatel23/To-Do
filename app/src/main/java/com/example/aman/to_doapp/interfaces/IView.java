@@ -9,11 +9,14 @@ import com.example.aman.to_doapp.models.Todo;
 
 public interface IView {
 
-    void displayTodo(Todo todo);
-
-    void displayNextTodo(Todo todo);
 
     void showAddView();
 
-    void showEditView();
+    void showEditView(int position);
+
+    void handleDelete(int position);
+
+    void handleAdd(int i);
+
+    void handleEdit(int position);
 }

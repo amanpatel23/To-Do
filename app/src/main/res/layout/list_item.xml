@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:id="@+id/todoContainer"
+    android:padding="10dp">>
 
-</LinearLayout>
+    <TextView
+        android:text="Todo Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TodoItemNameTextView"
+        android:textSize="32sp" />
+
+    <CheckBox
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TodoItemCompletedCheckBox"
+        android:layout_above="@+id/TodoItemContentTextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Due Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TodoItemDueDateTextView"
+        android:textSize="22sp"
+        android:layout_below="@+id/TodoItemContentTextView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:text="Content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TodoItemContentTextView"
+        android:textSize="22sp"
+        android:layout_below="@+id/TodoItemNameTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+</RelativeLayout>

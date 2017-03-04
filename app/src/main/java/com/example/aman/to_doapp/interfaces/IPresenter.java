@@ -2,6 +2,8 @@ package com.example.aman.to_doapp.interfaces;
 
 import com.example.aman.to_doapp.models.Todo;
 
+import java.util.List;
+
 
 /**
  * Created by Aman on 2/15/17.
@@ -9,15 +11,18 @@ import com.example.aman.to_doapp.models.Todo;
 
 public interface IPresenter {
 
-    void moveToPrevTodo();
-    void moveToNextTodo();
-    Todo getCurrentTodo();
-    void markCurrentTodoImportant();
-    void markCurrentTodoCompleted();
-    Todo getNextTodo();
 
-    void showAddOrEditView(Todo todo);
+    void handleClick(Todo text, int adapterPosition);
 
-    void handleNextBtnClick();
-    void handlePrevBtnClick();
+    List<Todo> getTodos();
+
+    void handleLongPress(int position);
+
+    void handleAddClick();
+
+    void handleEditClick(int position);
+
+    //void markCurrentTodoCompleted();
+
+
 }

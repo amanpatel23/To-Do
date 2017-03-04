@@ -8,7 +8,6 @@ public interface IEditModel {
 
     void setName(String text);
     void setContents(String text);
-    void setDateCreated(String text);
     void setDueDate(String text);
 
 }
