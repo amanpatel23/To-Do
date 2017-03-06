@@ -4,7 +4,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.aman.to_doapp.adapters.RecyclerAdapter;
+import com.example.aman.to_doapp.interfaces.IEditPresenter;
 import com.example.aman.to_doapp.interfaces.IPresenter;
+import com.example.aman.to_doapp.models.Todo;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,8 +31,14 @@ public class ViewTests {
     @Rule
     public ActivityTestRule<MainActivity> mActivity = new ActivityTestRule<MainActivity>(MainActivity.class);
 
+    @Rule
+    public ActivityTestRule<EditTodoActivity> eActivity = new ActivityTestRule<EditTodoActivity>(EditTodoActivity.class);
+
     @Mock
     IPresenter presenter;
+
+    @Mock
+    IEditPresenter editpresenter;
 
     @Mock
     RecyclerAdapter recyclerAdapter;
@@ -48,6 +56,17 @@ public class ViewTests {
         activity.setPresenter(presenter);
 
         onView(withId(R.id.TodoItemNameTextView)).perform(click());
+
+        verify(presenter).handleClick(1);
+    }
+
+    @Test
+    public void TestEditButtonContentCallsCorrectMethodOnPresenter() {
+
+        MainActivity activity = mActivity.getActivity();
+        activity.setPresenter(presenter);
+
+        onView(withId(R.id.TodoItemContentTextView)).perform(click());
 
         verify(presenter).handleClick(1);
     }
@@ -74,6 +93,8 @@ public class ViewTests {
 
         verify(presenter).handleLongPress(1);
     }
+
+
 
 
 
