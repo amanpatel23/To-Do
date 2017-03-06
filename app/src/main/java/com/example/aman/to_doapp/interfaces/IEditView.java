@@ -12,6 +12,7 @@ public interface IEditView {
     void displayName(int name);
     void updateViewWithViewModel(EditTodoViewModel vm);
 
+
     void returnResult(EditTodoViewModel viewModel);
 
     void displayInvalid(EditTodoViewModel viewModel);
@@ -19,4 +20,6 @@ public interface IEditView {
     void setInitialFields(EditTodoViewModel viewModel);
 
     void sendTodoBack(Intent intent);
+
+
 }

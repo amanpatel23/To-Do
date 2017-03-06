@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.aman.to_doapp.adapters.RecyclerAdapter;
 import com.example.aman.to_doapp.interfaces.IEditPresenter;
 import com.example.aman.to_doapp.interfaces.IEditView;
 import com.example.aman.to_doapp.interfaces.ITodoService;
@@ -55,6 +56,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         viewModelTv = (TextView)findViewById(R.id.debug_model);
         saveBtn = (Button)findViewById(R.id.save_button);
 
+        final Intent i = new Intent(this, MainActivity.class);
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -63,12 +66,13 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 String content = contentEt.getText().toString();
                 String dueDate = dueDateEt.getText().toString();
 
-                if(name.isEmpty()) {
-                    nameEt.setError("Enter Todo Name");
-                    return;
-                }
+                i.putExtra("nameI", name);
+                i.putExtra("contentI", content);
+                i.putExtra("duedateI", dueDate);
 
+                startActivity(i);
               presenter.saveTodo(name, content, dueDate);
+
           }
         });
 
@@ -88,7 +92,11 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
             public void afterTextChanged(Editable editable) {
                 presenter.updateTodoName(editable.toString());
             }
+
+
         });
+
+
 
         contentEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -138,12 +146,12 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 +  ", Due Date: " + vm.dueDate);
     }
 
+
     @Override
     public void returnResult(EditTodoViewModel viewModel) {
         Intent intent = viewModel.makeIntent();
-//        presenter.updateTodoName(viewModel.name);
-//        presenter.updateTodoContent(viewModel.content);
-//        presenter.updateTodoDueDate(viewModel.dueDate);
+        //edited
+        presenter.saveTodo(viewModel.name, viewModel.content, viewModel.dueDate);
         setResult(RESULT_OK, intent);
         finish();
     }

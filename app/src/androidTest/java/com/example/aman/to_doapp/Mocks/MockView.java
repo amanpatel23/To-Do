@@ -11,16 +11,6 @@ public class MockView implements com.example.aman.to_doapp.interfaces.IView {
     public boolean displayedNextTodo;
     public Todo displayedTodo;
 
-    @Override
-    public void displayTodo(Todo todo) {
-        displayTodoWasCalled = true;
-        displayedTodo = todo;
-    }
-
-    @Override
-    public void displayNextTodo(Todo todo) {
-        displayedNextTodo = true;
-    }
 
     @Override
     public void showAddView() {
@@ -28,7 +18,22 @@ public class MockView implements com.example.aman.to_doapp.interfaces.IView {
     }
 
     @Override
-    public void showEditView() {
+    public void showEditView(int position) {
+
+    }
+
+    @Override
+    public void handleDelete(int position) {
+
+    }
+
+    @Override
+    public void handleAdd(int i) {
+
+    }
+
+    @Override
+    public void handleEdit(int position) {
 
     }
 }

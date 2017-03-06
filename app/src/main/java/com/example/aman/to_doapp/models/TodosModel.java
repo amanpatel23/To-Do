@@ -3,7 +3,6 @@ package com.example.aman.to_doapp.models;
 import com.example.aman.to_doapp.interfaces.IModel;
 import com.example.aman.to_doapp.interfaces.ITodoService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +10,7 @@ import java.util.List;
  */
 
 public class TodosModel implements IModel {
+
 
     List<Todo> todos;
 
@@ -37,6 +37,7 @@ public class TodosModel implements IModel {
     public void edit(Todo todo) {
 
     }
+
 
 
 }

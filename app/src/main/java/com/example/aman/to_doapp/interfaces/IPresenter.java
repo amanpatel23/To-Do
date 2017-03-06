@@ -11,16 +11,14 @@ import java.util.List;
 
 public interface IPresenter {
 
-
-    void handleClick(Todo text, int adapterPosition);
-
     List<Todo> getTodos();
+
+    void handleClick(int adapterPosition);
 
     void handleLongPress(int position);
 
     void handleAddClick();
 
-    void handleEditClick(int position);
 
     //void markCurrentTodoCompleted();
 

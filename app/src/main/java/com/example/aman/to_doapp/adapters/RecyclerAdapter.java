@@ -20,9 +20,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
     IPresenter presenter;
 
     // inject (pass in) the presenter.
-    // the presenter is where we get the data for this adapater.
+    // the presenter is where we get the data for this adapter.
     // the presenter holds the model, so we ask the presenter for data,
-    // the presenter then asks the model for data, and the model asks the datasource
+    // the presenter then asks the model for data, and the model asks the data source
     public RecyclerAdapter(final IPresenter presenter) {
         this.presenter = presenter;
     }
@@ -46,7 +46,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
         return presenter.getTodos().size();
     }
 
-    class DemoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+
+
+
+    class DemoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         TextView name;
         TextView content;
@@ -62,7 +65,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
             completed = (CheckBox)todoView.findViewById(R.id.TodoItemCompletedCheckBox);
         }
 
-        // binds an item to the view
         public void bind(Todo todo1) {
             todo = todo1;
             name.setText(todo.getName());
@@ -71,14 +73,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
             completed.setChecked(todo.isCompleted());
             name.setOnClickListener(this);
             name.setOnLongClickListener(this);
+            content.setOnClickListener(this);
+            content.setOnLongClickListener(this);
+            dueDate.setOnClickListener(this);
+            dueDate.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             switch(view.getId()){
                 case R.id.TodoItemNameTextView:
-                    // delegate clicks to the presenter
-                    presenter.handleClick(todo, getAdapterPosition());
+                case R.id.TodoItemContentTextView:
+                case R.id.TodoItemDueDateTextView:
+                    presenter.handleClick(getAdapterPosition());
                     break;
             }
         }
@@ -87,8 +94,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
         public boolean onLongClick(View view) {
             switch(view.getId()) {
                 case R.id.TodoItemNameTextView:
-                    // delegate long clicks to the presenter
+                case R.id.TodoItemContentTextView:
+                case R.id.TodoItemDueDateTextView:
                     presenter.handleLongPress(getAdapterPosition());
+                    break;
             }
             return false;
         }

@@ -13,6 +13,7 @@ import org.mockito.Mock;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -37,26 +38,37 @@ public class ViewTests {
 
 
     @Test
-    public void TestNextButtonCallsCorrectMethodOnPresenter() {
+    public void TestEditButtonCallsCorrectMethodOnPresenter() {
 
         MainActivity activity = mActivity.getActivity();
         activity.setPresenter(presenter);
 
-        onView(withId(R.id.nextBtn)).perform(click());
+        onView(withId(R.id.TodoItemNameTextView)).perform(click());
 
-        verify(presenter).handleNextBtnClick();
+        verify(presenter).handleClick(1);
     }
 
 
     @Test
-    public void TestPrevButtonCallsCorrectMethodOnPresenter() {
+    public void TestAddButtonCallsCorrectMethodOnPresenter() {
 
         MainActivity activity = mActivity.getActivity();
         activity.setPresenter(presenter);
 
-        onView(withId(R.id.prevBtn)).perform(click());
+        onView(withId(R.id.add_todo_button)).perform(click());
 
-        verify(presenter).handlePrevBtnClick();
+        verify(presenter).handleAddClick();
+    }
+
+    @Test
+    public void TestDeleteCallsCorrectMethodOnPresenter() {
+
+        MainActivity activity = mActivity.getActivity();
+        activity.setPresenter(presenter);
+
+        onView(withId(R.id.add_todo_button)).perform(longClick());
+
+        verify(presenter).handleLongPress(1);
     }
 
 
