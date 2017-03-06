@@ -86,6 +86,15 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     public void handleEdit(int position) {
         adapter.notifyItemChanged(position);
+//
+//        Intent i = getIntent();
+//        String nameE = i.getStringExtra(nameI);
+//        String contentE = i.getStringExtra(contentI);
+//        String duedateE = i.getStringExtra(nameI);
+//
+//        presenter.getTodos().get(position).setName(nameE);
+//        presenter.getTodos().get(position).setContents(contentE);
+//        presenter.getTodos().get(position).setDueDate(duedateE);
     }
 
     @Override

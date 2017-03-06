@@ -3,6 +3,7 @@ package com.example.aman.to_doapp;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.example.aman.to_doapp.adapters.RecyclerAdapter;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 
 import org.junit.Before;
@@ -30,6 +31,9 @@ public class ViewTests {
 
     @Mock
     IPresenter presenter;
+
+    @Mock
+    RecyclerAdapter recyclerAdapter;
 
     @Before
     public void setup() {

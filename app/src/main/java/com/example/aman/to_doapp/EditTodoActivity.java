@@ -41,14 +41,16 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_todo_layout);
-        bindView();
+        final Intent i = new Intent(this, MainActivity.class);
+        bindView(i);
+
         ITodoService todoService = TodoService.gettodoService();
         presenter = new EditTodoPresenter(this, new TodosModel(todoService));
         presenter.showName(getIntent().getIntExtra("START_REASON", Constants.ADD_TODO_REQUEST_CODE));
         presenter.setViewModel(getIntent());
     }
 
-    private void bindView() {
+    private void bindView(final Intent i) {
         nameTv = (TextView)findViewById(R.id.name_text);
         nameEt = (EditText)findViewById(R.id.nameEditText);
         contentEt = (EditText)findViewById(R.id.contentEditText);
@@ -56,7 +58,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         viewModelTv = (TextView)findViewById(R.id.debug_model);
         saveBtn = (Button)findViewById(R.id.save_button);
 
-        final Intent i = new Intent(this, MainActivity.class);
+
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
 
