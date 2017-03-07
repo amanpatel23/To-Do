@@ -65,9 +65,9 @@ public class EditTodoPresenter implements IEditPresenter {
     @Override
     public void saveTodo(String name, String content,  String dueDate) {
         Intent intent = new Intent();
-        intent.putExtra("NAME", name);
-        intent.putExtra("CONTENT", content);
-        intent.putExtra("DUE DATE", dueDate);
+        intent.putExtra("NAMEI", name);
+        intent.putExtra("CONTENTI", content);
+        intent.putExtra("DUE DATEI", dueDate);
         view.sendTodoBack(intent);
     }
 

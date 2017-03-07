@@ -19,24 +19,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
 
     IPresenter presenter;
 
-    // inject (pass in) the presenter.
-    // the presenter is where we get the data for this adapter.
-    // the presenter holds the model, so we ask the presenter for data,
-    // the presenter then asks the model for data, and the model asks the data source
     public RecyclerAdapter(final IPresenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
     public DemoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // inflate the view holder here
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_list_item, parent, false);
         return new DemoViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(DemoViewHolder holder, int position) {
-        // find the right item in the collection using the position and bind the view to the Thing
         Todo todo = presenter.getTodos().get(position);
         holder.bind(todo);
     }

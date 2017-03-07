@@ -1,18 +1,19 @@
 package com.example.aman.to_doapp;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.content.Intent;
 
 import com.example.aman.to_doapp.adapters.RecyclerAdapter;
+import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.interfaces.IView;
-import com.example.aman.to_doapp.interfaces.IPresenter;
+import com.example.aman.to_doapp.models.Todo;
 import com.example.aman.to_doapp.models.TodosModel;
 import com.example.aman.to_doapp.presenters.Presenter;
 import com.example.aman.to_doapp.services.TodoService;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
         super.onPause();
     }
 
+
+
     @Override
     public void showAddView() {
         Intent intent = EditTodoActivity.newIntent(this);
@@ -86,15 +89,6 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     public void handleEdit(int position) {
         adapter.notifyItemChanged(position);
-//
-//        Intent i = getIntent();
-//        String nameE = i.getStringExtra(nameI);
-//        String contentE = i.getStringExtra(contentI);
-//        String duedateE = i.getStringExtra(nameI);
-//
-//        presenter.getTodos().get(position).setName(nameE);
-//        presenter.getTodos().get(position).setContents(contentE);
-//        presenter.getTodos().get(position).setDueDate(duedateE);
     }
 
     @Override
@@ -105,6 +99,16 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String name = data.getStringExtra("NAMEI");
+                String content = data.getStringExtra("CONTENTI");
+                String duedate = data.getStringExtra("DUE DATEI");
+                Todo todo = new Todo(name,content,duedate,false);
+
+
+            }
+        }
     }
 
     @Override

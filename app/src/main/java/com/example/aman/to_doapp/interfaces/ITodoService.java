@@ -11,4 +11,7 @@ import java.util.List;
 
 public interface ITodoService {
     List<Todo> getTodos();
+
+    void addTodo(Todo todo);
+    void UpdateTodo(Todo todo);
 }

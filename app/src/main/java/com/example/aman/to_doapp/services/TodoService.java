@@ -1,10 +1,10 @@
 package com.example.aman.to_doapp.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.models.Todo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Aman on 2/15/17.
@@ -50,5 +50,15 @@ public class TodoService implements ITodoService {
     @Override
     public List<Todo> getTodos() {
         return todos;
+    }
+
+    @Override
+    public void addTodo(Todo todo) {
+        todos.add(todo);
+    }
+
+    @Override
+    public void UpdateTodo(Todo todo) {
+
     }
 }

@@ -18,6 +18,8 @@ public class Singleton {
     }
 
     private ITodoService todoService;
+
+
     private Singleton() {
         ITodoService todos = TodoService.gettodoService();
         todoService = todos;

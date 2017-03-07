@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.aman.to_doapp.adapters.RecyclerAdapter;
 import com.example.aman.to_doapp.interfaces.IEditPresenter;
 import com.example.aman.to_doapp.interfaces.IEditView;
 import com.example.aman.to_doapp.interfaces.ITodoService;
@@ -41,24 +40,20 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_todo_layout);
-        final Intent i = new Intent(this, MainActivity.class);
-        bindView(i);
-
+        bindView();
         ITodoService todoService = TodoService.gettodoService();
         presenter = new EditTodoPresenter(this, new TodosModel(todoService));
         presenter.showName(getIntent().getIntExtra("START_REASON", Constants.ADD_TODO_REQUEST_CODE));
         presenter.setViewModel(getIntent());
     }
 
-    private void bindView(final Intent i) {
+    private void bindView() {
         nameTv = (TextView)findViewById(R.id.name_text);
         nameEt = (EditText)findViewById(R.id.nameEditText);
         contentEt = (EditText)findViewById(R.id.contentEditText);
         dueDateEt = (EditText)findViewById(R.id.dueDateEditText);
         viewModelTv = (TextView)findViewById(R.id.debug_model);
         saveBtn = (Button)findViewById(R.id.save_button);
-
-
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -68,12 +63,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 String content = contentEt.getText().toString();
                 String dueDate = dueDateEt.getText().toString();
 
-                i.putExtra("nameI", name);
-                i.putExtra("contentI", content);
-                i.putExtra("duedateI", dueDate);
-
-                startActivity(i);
-              presenter.saveTodo(name, content, dueDate);
+                presenter.saveTodo(name, content, dueDate);
 
           }
         });
@@ -98,8 +88,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
 
         });
 
-
-
         contentEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -114,7 +102,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 presenter.updateTodoContent(editable.toString());
             }
         });
-
 
         dueDateEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -152,7 +139,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     @Override
     public void returnResult(EditTodoViewModel viewModel) {
         Intent intent = viewModel.makeIntent();
-        //edited
         presenter.saveTodo(viewModel.name, viewModel.content, viewModel.dueDate);
         setResult(RESULT_OK, intent);
         finish();
