@@ -30,7 +30,7 @@ public class TodosModel implements IModel {
 
     @Override
     public void add(Todo todo) {
-        todos.add(0, todo);
+
     }
 
     @Override

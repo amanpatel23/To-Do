@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     public void handleAdd(int i) {
         adapter.notifyItemInserted(i);
-        recyclerView.scrollToPosition(0);
+        recyclerView.scrollToPosition(presenter.getTodos().size()-1);
     }
 
     @Override
@@ -99,15 +99,14 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1) {
-            if(resultCode == RESULT_OK) {
+        if(requestCode == 1 && resultCode == RESULT_OK) {
                 String name = data.getStringExtra("NAMEI");
                 String content = data.getStringExtra("CONTENTI");
                 String duedate = data.getStringExtra("DUE DATEI");
                 Todo todo = new Todo(name,content,duedate,false);
-
-
-            }
+                ITodoService todoService = TodoService.gettodoService();
+                todoService.addTodo(todo);
+                handleAdd(0);
         }
     }
 
