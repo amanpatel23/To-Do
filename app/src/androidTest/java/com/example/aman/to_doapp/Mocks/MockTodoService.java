@@ -18,4 +18,14 @@ public class MockTodoService implements ITodoService {
     public List<Todo> getTodos() {
         return null;
     }
+
+    @Override
+    public void addTodo(Todo todo) {
+
+    }
+
+    @Override
+    public void UpdateTodo(Todo todo) {
+
+    }
 }

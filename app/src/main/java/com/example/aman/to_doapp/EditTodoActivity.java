@@ -40,7 +40,9 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_todo_layout);
+
         bindView();
+
         ITodoService todoService = TodoService.gettodoService();
         presenter = new EditTodoPresenter(this, new TodosModel(todoService));
         presenter.showName(getIntent().getIntExtra("START_REASON", Constants.ADD_TODO_REQUEST_CODE));
