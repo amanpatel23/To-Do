@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.aman.to_doapp.MainActivity">
+
+    <fragment
+        android:name="com.example.aman.to_doapp.fragments.MainFragment"
+        android:id="@+id/mainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:name="com.example.aman.to_doapp.fragments.EditFragment"
+        android:id="@+id/editFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:layout="@layout/fragment_edit" />
+</LinearLayout>

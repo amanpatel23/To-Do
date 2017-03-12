@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recycler_view);
+        setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     public void handleEdit(int position) {
         adapter.notifyItemChanged(position);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -100,18 +101,29 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && resultCode == RESULT_OK) {
-                String name = data.getStringExtra("NAMEI");
-                String content = data.getStringExtra("CONTENTI");
-                String duedate = data.getStringExtra("DUE DATEI");
-                Todo todo = new Todo(name,content,duedate,false);
+
+                String nameAdd = data.getStringExtra("NAMEI");
+                String contentAdd = data.getStringExtra("CONTENTI");
+                String duedateAdd = data.getStringExtra("DUE DATEI");
+                Todo todo = new Todo(nameAdd,contentAdd,duedateAdd,false);
                 ITodoService todoService = TodoService.gettodoService();
                 todoService.addTodo(todo);
                 handleAdd(0);
         }
+
+        if(requestCode == 2 && resultCode == RESULT_OK) {
+
+            String nameEdit = data.getStringExtra("NAMEI");
+            String contentEdit = data.getStringExtra("CONTENTI");
+            String duedateEdit = data.getStringExtra("DUE DATEI");
+            handleEdit(0);
+        }
     }
+
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
     }
+
 }

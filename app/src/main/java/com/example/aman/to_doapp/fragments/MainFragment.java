@@ -1,12 +1,15 @@
 package com.example.aman.to_doapp.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.aman.to_doapp.R;
+import com.example.aman.to_doapp.adapters.RecyclerAdapter;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.interfaces.IView;
 
@@ -17,6 +20,10 @@ import com.example.aman.to_doapp.interfaces.IView;
 public class MainFragment extends Fragment implements IView, View.OnClickListener {
 
     private IPresenter presenter;
+    private RecyclerView recyclerView;
+    private RecyclerAdapter adapter;
+    private FloatingActionButton floatingActionButton;
+
     public static final int REQUEST = 1;
 
     public MainFragment() {

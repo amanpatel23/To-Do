@@ -4,9 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.aman.to_doapp.fragments.MainFragment"
+    tools:context="com.example.aman.to_doapp.fragments.EditFragment"
     android:padding="16dp">
 
-    <include layout="@layout/recycler_view"/>
+    <include layout="@layout/edit_todo_layout"/>
 
 </LinearLayout>
