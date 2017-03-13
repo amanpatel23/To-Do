@@ -53,12 +53,14 @@ public class TodoService implements ITodoService {
     }
 
     @Override
-    public void addTodo(Todo todo) {
-        todos.add(todo);
+    public void addTodo(Todo todoAdd) {
+        todos.add(todoAdd);
     }
 
     @Override
-    public void UpdateTodo(Todo todo) {
-
+    public void UpdateTodo(Todo todoEdit, int position) {
+        todos.get(position).setName(todoEdit.getName());
+        todos.get(position).setContents(todoEdit.getContents());
+        todos.get(position).setDueDate(todoEdit.getDueDate());
     }
 }

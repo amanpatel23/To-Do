@@ -1,5 +1,6 @@
 package com.example.aman.to_doapp.adapters;
 
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.example.aman.to_doapp.R;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.models.Todo;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Aman on 2/24/17.
@@ -77,9 +80,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
                 case R.id.TodoItemNameTextView:
                 case R.id.TodoItemContentTextView:
                 case R.id.TodoItemDueDateTextView:
+                    SharedPreferences prefs = view.getContext().getSharedPreferences("my_prefs", MODE_PRIVATE);
+                    SharedPreferences.Editor edit = prefs.edit();
+                    int pos = getAdapterPosition();
+                    edit.putInt("POS", pos);
+                    edit.apply();
                     presenter.handleClick(getAdapterPosition());
                     break;
             }
+
         }
 
         @Override

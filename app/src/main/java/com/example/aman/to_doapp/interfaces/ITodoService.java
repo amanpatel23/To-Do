@@ -13,5 +13,5 @@ public interface ITodoService {
     List<Todo> getTodos();
 
     void addTodo(Todo todo);
-    void UpdateTodo(Todo todo);
+    void UpdateTodo(Todo todo, int position);
 }

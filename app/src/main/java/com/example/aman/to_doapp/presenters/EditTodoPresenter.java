@@ -68,6 +68,7 @@ public class EditTodoPresenter implements IEditPresenter {
         intent.putExtra("NAMEI", name);
         intent.putExtra("CONTENTI", content);
         intent.putExtra("DUE DATEI", dueDate);
+
         view.sendTodoBack(intent);
     }
 

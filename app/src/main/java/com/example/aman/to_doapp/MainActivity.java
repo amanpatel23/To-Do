@@ -1,6 +1,7 @@
 package com.example.aman.to_doapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     @Override
     public void handleAdd(int i) {
         adapter.notifyItemInserted(i);
+        adapter.notifyDataSetChanged();
         recyclerView.scrollToPosition(presenter.getTodos().size()-1);
     }
 
@@ -116,7 +118,12 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
             String nameEdit = data.getStringExtra("NAMEI");
             String contentEdit = data.getStringExtra("CONTENTI");
             String duedateEdit = data.getStringExtra("DUE DATEI");
-            handleEdit(0);
+            SharedPreferences bb = getSharedPreferences("my_prefs", 0);
+            int pos = bb.getInt("POS", 0);
+            Todo todo = new Todo(nameEdit,contentEdit,duedateEdit,false);
+            ITodoService todoService = TodoService.gettodoService();
+            todoService.UpdateTodo(todo, pos);
+            handleEdit(pos);
         }
     }
 
