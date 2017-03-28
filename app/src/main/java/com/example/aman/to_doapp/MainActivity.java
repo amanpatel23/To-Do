@@ -21,6 +21,8 @@ import com.example.aman.to_doapp.models.Todo;
 import com.example.aman.to_doapp.presenters.Presenter;
 import com.example.aman.to_doapp.services.TodoService;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements IView,  CompoundButton.OnCheckedChangeListener{
 
@@ -103,6 +105,17 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     public void handleEdit(int position) {
         adapter.notifyItemChanged(position);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void refreshPeople(List<Todo> all) {
+        if(all != null) {
+            // replace the existing list
+            adapter.setTodos(all);
+        } else {
+            // just tell the adapter that something has changed
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

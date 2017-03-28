@@ -12,6 +12,9 @@ import com.example.aman.to_doapp.R;
 import com.example.aman.to_doapp.adapters.RecyclerAdapter;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.interfaces.IView;
+import com.example.aman.to_doapp.models.Todo;
+
+import java.util.List;
 
 /**
  * Created by Aman on 3/8/2017.
@@ -61,6 +64,11 @@ public class MainFragment extends Fragment implements IView, View.OnClickListene
 
     @Override
     public void handleEdit(int position) {
+
+    }
+
+    @Override
+    public void refreshPeople(List<Todo> all) {
 
     }
 

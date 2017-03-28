@@ -12,6 +12,8 @@ import com.example.aman.to_doapp.R;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.models.Todo;
 
+import java.util.List;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -20,7 +22,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoViewHolder> {
 
-    IPresenter presenter;
+    private List<Todo> todos;
+    private IPresenter presenter;
 
     public RecyclerAdapter(final IPresenter presenter) {
         this.presenter = presenter;
@@ -41,6 +44,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
     @Override
     public int getItemCount() {
         return presenter.getTodos().size();
+    }
+
+    public void setTodos(List<Todo> todos) {
+        this.todos = todos;
+        this.notifyDataSetChanged();
     }
 
 
