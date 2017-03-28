@@ -29,14 +29,15 @@ public class TodosModel implements IModel {
     }
 
     @Override
-    public void add(Todo todo) {
+    public void add(Object o) {
 
     }
 
     @Override
-    public void edit(Todo todo) {
+    public void edit(Object o) {
 
     }
+
 
 
 

@@ -13,35 +13,35 @@ import java.util.List;
 
 public class Presenter implements IPresenter {
 
-    IModel model;
+    IModel<Todo> db;
     IView view;
 
-    public Presenter(IView view, IModel model) {
+    public Presenter(IView view, IModel<Todo> dataSource) {
         this.view = view;
-        this.model = model;
+        this.db = dataSource;
     }
 
     @Override
     public List<Todo> getTodos() {
-        return model.getTodos();
+        return db.getTodos();
     }
 
     @Override
     public void handleClick(int adapterPosition) {
         view.showEditView(adapterPosition);
-        model.edit(getTodos().get(adapterPosition));
+        db.edit(getTodos().get(adapterPosition));
     }
 
     @Override
     public void handleLongPress(int position) {
-        model.delete(position);
+        db.delete(position);
         view.handleDelete(position);
     }
 
     @Override
     public void handleAddClick() {
         view.showAddView();
-        model.add(new Todo());
+        db.add(new Todo());
     }
 /*
     @Override

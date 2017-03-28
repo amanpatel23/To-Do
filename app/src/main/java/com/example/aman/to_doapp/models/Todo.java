@@ -1,11 +1,14 @@
 package com.example.aman.to_doapp.models;
 
+import java.util.UUID;
+
 /**
  * Created by Aman on 2/15/17.
  */
 
 public class Todo {
 
+    public UUID id;
     private String name;
     private String contents;
     private String dueDate;

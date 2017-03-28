@@ -1,5 +1,7 @@
 package com.example.aman.to_doapp;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,11 +13,11 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.example.aman.to_doapp.adapters.RecyclerAdapter;
+import com.example.aman.to_doapp.fragments.MainFragment;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.interfaces.IView;
 import com.example.aman.to_doapp.models.Todo;
-import com.example.aman.to_doapp.models.TodosModel;
 import com.example.aman.to_doapp.presenters.Presenter;
 import com.example.aman.to_doapp.services.TodoService;
 
@@ -34,7 +36,16 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainFragment mainFragment = new MainFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.commit();
+
+
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ITodoService todoService = TodoService.gettodoService();
-        presenter = new Presenter(this, new TodosModel(todoService));
+        presenter = new Presenter(this, new TodoDB(this));
         adapter = new RecyclerAdapter(presenter);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);

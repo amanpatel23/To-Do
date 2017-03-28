@@ -22,7 +22,7 @@ public class TodoService implements ITodoService {
 
     private TodoService(){
         todos = new ArrayList<>();
-
+/*
         Todo todo = new Todo("Finish HW", "COSC 431","2/20/17", false);
         todos.add(todo);
         todo = new Todo("Project Due", "COSC 412","5/20/17", true);
@@ -45,6 +45,7 @@ public class TodoService implements ITodoService {
         todos.add(todo);
         todo = new Todo("Dummy 7", "COSC 457", "5/16/17", false);
         todos.add(todo);
+        */
     }
 
     @Override
