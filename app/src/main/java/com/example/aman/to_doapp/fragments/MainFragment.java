@@ -68,7 +68,7 @@ public class MainFragment extends Fragment implements IView, View.OnClickListene
     }
 
     @Override
-    public void refreshPeople(List<Todo> all) {
+    public void refreshTodos(List<Todo> all) {
 
     }
 

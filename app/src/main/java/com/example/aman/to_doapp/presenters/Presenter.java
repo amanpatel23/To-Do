@@ -6,6 +6,7 @@ import com.example.aman.to_doapp.interfaces.IView;
 import com.example.aman.to_doapp.models.Todo;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Aman on 2/15/17.
@@ -34,14 +35,21 @@ public class Presenter implements IPresenter {
 
     @Override
     public void handleLongPress(int position) {
-        db.delete(position);
+        db.delete(getTodos().get(position));
         view.handleDelete(position);
     }
 
     @Override
     public void handleAddClick() {
-        view.showAddView();
-        db.add(new Todo());
+        addTodo();
+    }
+
+    @Override
+    public void addTodo() {
+        Todo todo = new Todo("sljs","adkjs","2", false);
+        todo.id = UUID.randomUUID();
+        db.add(todo);
+        view.refreshTodos(db.getTodos());
     }
 /*
     @Override

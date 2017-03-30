@@ -24,8 +24,13 @@ public class TodosModel implements IModel {
     }
 
     @Override
-    public void delete(int position) {
-        todos.remove(position);
+    public void delete(Object todo) {
+        todos.remove(todo);
+    }
+
+    @Override
+    public void close() {
+
     }
 
     @Override

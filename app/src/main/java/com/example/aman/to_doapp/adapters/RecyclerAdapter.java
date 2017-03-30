@@ -25,8 +25,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
     private List<Todo> todos;
     private IPresenter presenter;
 
-    public RecyclerAdapter(final IPresenter presenter) {
+    public RecyclerAdapter(IPresenter presenter) {
         this.presenter = presenter;
+        this.todos = presenter.getTodos();
     }
 
     @Override
@@ -37,19 +38,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
 
     @Override
     public void onBindViewHolder(DemoViewHolder holder, int position) {
-        Todo todo = presenter.getTodos().get(position);
+        Todo todo = todos.get(position);
         holder.bind(todo);
     }
 
     @Override
     public int getItemCount() {
-        return presenter.getTodos().size();
+        return todos.size();
     }
+
 
     public void setTodos(List<Todo> todos) {
         this.todos = todos;
         this.notifyDataSetChanged();
     }
+
 
 
     class DemoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {

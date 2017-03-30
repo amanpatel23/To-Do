@@ -1,7 +1,5 @@
 package com.example.aman.to_doapp;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.example.aman.to_doapp.adapters.RecyclerAdapter;
-import com.example.aman.to_doapp.fragments.MainFragment;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.interfaces.IView;
@@ -26,28 +23,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements IView,  CompoundButton.OnCheckedChangeListener{
 
-
     IPresenter presenter;
-
     RecyclerView recyclerView;
     RecyclerAdapter adapter;
     FloatingActionButton floatingActionButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        MainFragment mainFragment = new MainFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.commit();
-
-
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -57,11 +41,14 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
             }
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ITodoService todoService = TodoService.gettodoService();
+        //ITodoService todoService = TodoService.gettodoService();
         presenter = new Presenter(this, new TodoDB(this));
+
         adapter = new RecyclerAdapter(presenter);
         adapter.notifyDataSetChanged();
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
 
@@ -108,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     }
 
     @Override
-    public void refreshPeople(List<Todo> all) {
+    public void refreshTodos(List<Todo> all) {
         if(all != null) {
             // replace the existing list
             adapter.setTodos(all);

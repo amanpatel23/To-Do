@@ -6,15 +6,11 @@ import java.util.List;
  * Created by Aman on 2/15/17.
  */
 
-public interface IModel<Todo> {
-    List<Todo> getTodos();
-
-    void delete(int position);
-
-    void add(Todo todo);
-
-    void edit(Todo todo);
-
-
+public interface IModel<T> {
+    List<T> getTodos();
+    void add(T todo);
+    void edit(T todo);
+    void delete(T todo);
+    void close();
 
 }

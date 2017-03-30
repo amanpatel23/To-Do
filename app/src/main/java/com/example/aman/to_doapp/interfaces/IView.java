@@ -21,5 +21,5 @@ public interface IView {
 
     void handleEdit(int position);
 
-    void refreshPeople(List<Todo> all);
+    void refreshTodos(List<Todo> all);
 }
