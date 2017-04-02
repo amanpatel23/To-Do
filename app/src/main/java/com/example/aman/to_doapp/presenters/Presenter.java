@@ -31,7 +31,7 @@ public class Presenter implements IPresenter {
         return db.getTodos();
     }
 
-    /*
+
     @Override
     public void handleClick(int adapterPosition) {
         view.showEditView(adapterPosition);
@@ -40,15 +40,15 @@ public class Presenter implements IPresenter {
 
     @Override
     public void handleLongPress(int position) {
-        db.delete(getTodos().get(position));
         view.handleDelete(position);
+        removeTodo(db.getTodos().get(position));
     }
 
     @Override
     public void handleAddClick() {
         addTodo();
     }
-    */
+
 
     @Override
     public void addTodo() {

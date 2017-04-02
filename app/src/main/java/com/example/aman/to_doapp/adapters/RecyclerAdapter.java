@@ -107,7 +107,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
                 case R.id.TodoItemNameTextView:
                 case R.id.TodoItemContentTextView:
                 case R.id.TodoItemDueDateTextView:
-                    //presenter.handleLongPress(getAdapterPosition());
+                    presenter.handleLongPress(getAdapterPosition());
                     break;
             }
             return false;
