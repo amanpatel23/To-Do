@@ -19,8 +19,8 @@ import java.util.UUID;
 
 public class TodoDB implements IModel<Todo> {
 
-    private static final String DB_NAME = "Todo.db";
-    private static final int DB_VERSION = 1;
+    private static final String DB_NAME = "Todos.db";
+    private static final int DB_VERSION = 5;
     private static final String TABLE_NAME = "Todo";
     private static final String ID = "_id";
     private static final String TODO_NAME = "name";
@@ -41,9 +41,9 @@ public class TodoDB implements IModel<Todo> {
     private Todo makeTodo(Cursor cursor) {
         Todo todo = new Todo();
         todo.id = UUID.fromString(cursor.getString(cursor.getColumnIndex(ID)));
-        todo.setName(cursor.getString(cursor.getColumnIndex(TODO_NAME)));
-        todo.setContents(cursor.getString(cursor.getColumnIndex(TODO_CONTENT)));
-        todo.setDueDate(cursor.getString(cursor.getColumnIndex(TODO_DUEDATE)));
+        todo.name = (cursor.getString(cursor.getColumnIndex(TODO_NAME)));
+        todo.contents = (cursor.getString(cursor.getColumnIndex(TODO_CONTENT)));
+        todo.dueDate = (cursor.getString(cursor.getColumnIndex(TODO_DUEDATE)));
         return todo;
     }
 
@@ -61,29 +61,29 @@ public class TodoDB implements IModel<Todo> {
 
 
     @Override
-    public void add(Todo person) {
-        ContentValues cv = makeCV(person);
-        cv.put("_id", person.id.toString());
+    public void add(Todo todo) {
+        ContentValues cv = makeCV(todo);
+        cv.put("_id", todo.id.toString());
         db.insert(TABLE_NAME, null, cv);
     }
 
     @Override
-    public void edit(Todo person) {
-        ContentValues contentValues = makeCV(person);
-        db.update(TABLE_NAME, contentValues, ID + " = ?", new String[]{person.id.toString()});
+    public void edit(Todo todo) {
+        ContentValues contentValues = makeCV(todo);
+        db.update(TABLE_NAME, contentValues, ID + " = ?", new String[]{todo.id.toString()});
     }
 
-    private ContentValues makeCV(Todo todos) {
+    private ContentValues makeCV(Todo todo) {
         ContentValues cv = new ContentValues();
-        cv.put(TODO_NAME, todos.getName());
-        cv.put(TODO_CONTENT, todos.getContents());
-        cv.put(TODO_DUEDATE, todos.getDueDate());
+        cv.put(TODO_NAME, todo.name);
+        cv.put(TODO_CONTENT, todo.contents);
+        cv.put(TODO_DUEDATE, todo.dueDate);
         return cv;
     }
 
     @Override
-    public void delete(Todo person) {
-        db.delete(TABLE_NAME, ID + " = ?", new String[]{person.id.toString()});
+    public void delete(Todo todo) {
+        db.delete(TABLE_NAME, ID + " = ?", new String[]{todo.id.toString()});
     }
 
     class Helper extends SQLiteOpenHelper {
@@ -97,7 +97,7 @@ public class TodoDB implements IModel<Todo> {
             String createStatement = String.format("create table %s "
                             + " (%s text primary key not null," // uuid id
                             + " %s text not null," // name
-                            + " %s text not null);" // content
+                            + " %s text not null," // content
                             + " %s text not null);" // duedate
                     , TABLE_NAME, ID, TODO_NAME, TODO_CONTENT, TODO_DUEDATE);
             sqLiteDatabase.execSQL(createStatement);
@@ -105,7 +105,8 @@ public class TodoDB implements IModel<Todo> {
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            onCreate(sqLiteDatabase);
         }
     }
 }

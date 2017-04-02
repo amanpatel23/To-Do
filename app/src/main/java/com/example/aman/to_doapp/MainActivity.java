@@ -21,7 +21,7 @@ import com.example.aman.to_doapp.services.TodoService;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements IView,  CompoundButton.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements IView, View.OnClickListener,  CompoundButton.OnCheckedChangeListener{
 
     IPresenter presenter;
     RecyclerView recyclerView;
@@ -37,14 +37,14 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.handleAddClick();
+                presenter.addTodo();
             }
         });
 
         //ITodoService todoService = TodoService.gettodoService();
         presenter = new Presenter(this, new TodoDB(this));
-
         adapter = new RecyclerAdapter(presenter);
+
         adapter.notifyDataSetChanged();
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
@@ -61,7 +61,11 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
         super.onPause();
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.finish();
+    }
 
     @Override
     public void showAddView() {
@@ -106,6 +110,15 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
     }
 
     @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.add_todo_button:
+                presenter.addTodo();
+                break;
+        }
+    }
+
+    @Override
     public void handleDelete(int position) {
         adapter.notifyItemRemoved(position);
     }
@@ -118,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
                 String nameAdd = data.getStringExtra("NAMEI");
                 String contentAdd = data.getStringExtra("CONTENTI");
                 String duedateAdd = data.getStringExtra("DUE DATEI");
-                Todo todo = new Todo(nameAdd,contentAdd,duedateAdd,false);
+                Todo todo = new Todo(nameAdd,contentAdd,duedateAdd);
                 ITodoService todoService = TodoService.gettodoService();
                 todoService.addTodo(todo);
                 handleAdd(0);
@@ -131,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
             String duedateEdit = data.getStringExtra("DUE DATEI");
             SharedPreferences bb = getSharedPreferences("my_prefs", 0);
             int pos = bb.getInt("POS", 0);
-            Todo todo = new Todo(nameEdit,contentEdit,duedateEdit,false);
+            Todo todo = new Todo(nameEdit,contentEdit,duedateEdit);
             ITodoService todoService = TodoService.gettodoService();
             todoService.UpdateTodo(todo, pos);
             handleEdit(pos);

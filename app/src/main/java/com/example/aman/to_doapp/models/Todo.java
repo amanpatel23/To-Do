@@ -9,20 +9,19 @@ import java.util.UUID;
 public class Todo {
 
     public UUID id;
-    private String name;
-    private String contents;
-    private String dueDate;
-    private boolean isCompleted;
+    public String name;
+    public String contents;
+    public String dueDate;
+
 
 
     public Todo() {}
 
 
-    public Todo(String name, String contents, String dueDate, boolean completed){
+    public Todo(String name, String contents, String dueDate){
         this.name = name;
         this.contents = contents;
         this.dueDate = dueDate;
-        this.isCompleted = completed;
     }
 
     public String toString() {
@@ -55,12 +54,6 @@ public class Todo {
         this.dueDate = dueDate;
     }
 
-
-    public boolean isCompleted() { return isCompleted; }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
 
 
 }

@@ -13,13 +13,17 @@ public interface IPresenter {
 
     List<Todo> getTodos();
 
-    void handleClick(int adapterPosition);
-
-    void handleLongPress(int position);
-
-    void handleAddClick();
+//    void handleClick(int adapterPosition);
+//
+//    void handleLongPress(int position);
+//
+//    void handleAddClick();
 
     void addTodo();
+
+    void finish();
+
+    void removeTodo(Todo todo);
 
 
     //void markCurrentTodoCompleted();

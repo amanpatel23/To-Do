@@ -30,6 +30,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
         this.todos = presenter.getTodos();
     }
 
+    public void setTodos(List<Todo> todos) {
+        this.todos = todos;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public DemoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_list_item, parent, false);
@@ -45,12 +50,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
     @Override
     public int getItemCount() {
         return todos.size();
-    }
-
-
-    public void setTodos(List<Todo> todos) {
-        this.todos = todos;
-        this.notifyDataSetChanged();
     }
 
 
@@ -71,12 +70,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
             completed = (CheckBox)todoView.findViewById(R.id.TodoItemCompletedCheckBox);
         }
 
-        public void bind(Todo todo1) {
-            todo = todo1;
-            name.setText(todo.getName());
-            content.setText(todo.getContents());
-            dueDate.setText(todo.getDueDate());
-            completed.setChecked(todo.isCompleted());
+        public void bind(Todo todo) {
+            this.todo = todo;
+            name.setText(todo.name);
+            content.setText(todo.contents);
+            dueDate.setText(todo.dueDate);
+
             name.setOnClickListener(this);
             name.setOnLongClickListener(this);
             content.setOnClickListener(this);
@@ -96,7 +95,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
                     int pos = getAdapterPosition();
                     edit.putInt("POS", pos);
                     edit.apply();
-                    presenter.handleClick(getAdapterPosition());
+                    //presenter.handleClick(getAdapterPosition());
                     break;
             }
 
@@ -108,7 +107,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
                 case R.id.TodoItemNameTextView:
                 case R.id.TodoItemContentTextView:
                 case R.id.TodoItemDueDateTextView:
-                    presenter.handleLongPress(getAdapterPosition());
+                    //presenter.handleLongPress(getAdapterPosition());
                     break;
             }
             return false;
