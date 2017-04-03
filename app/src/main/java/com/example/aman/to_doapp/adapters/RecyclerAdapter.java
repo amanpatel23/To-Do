@@ -95,7 +95,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DemoVi
                     int pos = getAdapterPosition();
                     edit.putInt("POS", pos);
                     edit.apply();
-                    //presenter.handleClick(getAdapterPosition());
+                    presenter.handleClick(getAdapterPosition());
                     break;
             }
 

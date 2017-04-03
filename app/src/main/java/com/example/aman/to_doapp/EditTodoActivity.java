@@ -13,10 +13,8 @@ import android.widget.TextView;
 
 import com.example.aman.to_doapp.interfaces.IEditPresenter;
 import com.example.aman.to_doapp.interfaces.IEditView;
-import com.example.aman.to_doapp.interfaces.ITodoService;
-import com.example.aman.to_doapp.models.TodosModel;
+import com.example.aman.to_doapp.models.Todo;
 import com.example.aman.to_doapp.presenters.EditTodoPresenter;
-import com.example.aman.to_doapp.services.TodoService;
 import com.example.aman.to_doapp.viewmodels.EditTodoViewModel;
 
 /**
@@ -43,8 +41,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
 
         bindView();
 
-        ITodoService todoService = TodoService.gettodoService();
-        presenter = new EditTodoPresenter(this, new TodosModel(todoService));
+        presenter = new EditTodoPresenter(this, new TodoDB(this));
         presenter.showName(getIntent().getIntExtra("START_REASON", Constants.ADD_TODO_REQUEST_CODE));
         presenter.setViewModel(getIntent());
     }
@@ -64,8 +61,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 String name = nameEt.getText().toString();
                 String content = contentEt.getText().toString();
                 String dueDate = dueDateEt.getText().toString();
-
-                presenter.saveTodo(name, content, dueDate);
+                Todo todo = new Todo(name, content, dueDate);
+                presenter.saveTodo(todo);
 
           }
         });
@@ -141,7 +138,8 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     @Override
     public void returnResult(EditTodoViewModel viewModel) {
         Intent intent = viewModel.makeIntent();
-        presenter.saveTodo(viewModel.name, viewModel.content, viewModel.dueDate);
+        Todo todo = new Todo(viewModel.name, viewModel.content, viewModel.dueDate);
+        presenter.saveTodo(todo);
         setResult(RESULT_OK, intent);
         finish();
     }

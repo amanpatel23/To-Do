@@ -31,7 +31,6 @@ public class Presenter implements IPresenter {
         return db.getTodos();
     }
 
-
     @Override
     public void handleClick(int adapterPosition) {
         view.showEditView(adapterPosition);
@@ -42,6 +41,12 @@ public class Presenter implements IPresenter {
     public void handleLongPress(int position) {
         view.handleDelete(position);
         removeTodo(db.getTodos().get(position));
+    }
+
+    @Override
+    public void removeTodo(Todo todo) {
+        db.delete(todo);
+        view.refreshTodos(db.getTodos());
     }
 
     @Override
@@ -61,11 +66,6 @@ public class Presenter implements IPresenter {
         view.refreshTodos(db.getTodos());
     }
 
-    @Override
-    public void removeTodo(Todo todo) {
-        db.delete(todo);
-        view.refreshTodos(db.getTodos());
-    }
 
     @Override
     public void finish() {
@@ -76,22 +76,5 @@ public class Presenter implements IPresenter {
         int randomIndex = random.nextInt(randomNames.length);
         return randomNames[randomIndex];
     }
-/*
-    @Override
-    public void markCurrentTodoCompleted() {
-        Todo todo = getTodos();
-        todo.setCompleted(!todo.isImportant());
-        view.displayTodo(todo);
-    }
 
-
-    @Override
-    public void showAddOrEditView(Todo todo) {
-        if(todo == null) {
-            view.showAddView();
-        } else {
-            view.showEditView();
-        }
-    }
-*/
 }

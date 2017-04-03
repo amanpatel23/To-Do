@@ -6,6 +6,7 @@ import com.example.aman.to_doapp.Constants;
 import com.example.aman.to_doapp.interfaces.IEditPresenter;
 import com.example.aman.to_doapp.interfaces.IModel;
 import com.example.aman.to_doapp.interfaces.IEditView;
+import com.example.aman.to_doapp.models.Todo;
 import com.example.aman.to_doapp.viewmodels.EditTodoViewModel;
 import com.example.aman.to_doapp.R;
 
@@ -15,13 +16,13 @@ import com.example.aman.to_doapp.R;
 
 public class EditTodoPresenter implements IEditPresenter {
 
-    IModel model;
+    private IModel<Todo> db;;
     IEditView view;
     EditTodoViewModel viewModel;
 
-    public EditTodoPresenter(IEditView view, IModel model) {
+    public EditTodoPresenter(IEditView view, IModel<Todo> dataSource) {
         this.view = view;
-        this.model = model;
+        this.db = dataSource;
         this.viewModel = new EditTodoViewModel();
     }
 
@@ -63,12 +64,13 @@ public class EditTodoPresenter implements IEditPresenter {
     }
 
     @Override
-    public void saveTodo(String name, String content,  String dueDate) {
+    public void saveTodo(Todo todo) {
+        db.edit(todo);
         Intent intent = new Intent();
-        intent.putExtra("NAMEI", name);
-        intent.putExtra("CONTENTI", content);
-        intent.putExtra("DUE DATEI", dueDate);
-
+//        intent.putExtra("NAMEI", name);
+//        intent.putExtra("CONTENTI", content);
+//        intent.putExtra("DUE DATEI", dueDate);
+//
         view.sendTodoBack(intent);
     }
 

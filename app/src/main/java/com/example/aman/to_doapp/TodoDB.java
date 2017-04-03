@@ -70,6 +70,7 @@ public class TodoDB implements IModel<Todo> {
     @Override
     public void edit(Todo todo) {
         ContentValues contentValues = makeCV(todo);
+        todo.id = UUID.randomUUID();
         db.update(TABLE_NAME, contentValues, ID + " = ?", new String[]{todo.id.toString()});
     }
 

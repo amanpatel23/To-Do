@@ -2,6 +2,8 @@ package com.example.aman.to_doapp.interfaces;
 
 import android.content.Intent;
 
+import com.example.aman.to_doapp.models.Todo;
+
 /**
  * Created by Aman on 2/15/17.
  */
@@ -13,7 +15,7 @@ public interface IEditPresenter {
     void updateTodoContent(String text);
     void updateTodoDueDate(String text);
     void validateModel();
-    void saveTodo(String name, String content, String dueDate);
+    void saveTodo(Todo todo);
 
     void setViewModel(Intent intent);
 

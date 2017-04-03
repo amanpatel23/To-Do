@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.example.aman.to_doapp.adapters.RecyclerAdapter;
+import com.example.aman.to_doapp.interfaces.IModel;
 import com.example.aman.to_doapp.interfaces.IPresenter;
 import com.example.aman.to_doapp.interfaces.ITodoService;
 import com.example.aman.to_doapp.interfaces.IView;
@@ -21,12 +22,13 @@ import com.example.aman.to_doapp.services.TodoService;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements IView, View.OnClickListener,  CompoundButton.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements IView,  CompoundButton.OnCheckedChangeListener{
 
     IPresenter presenter;
     RecyclerView recyclerView;
     RecyclerAdapter adapter;
     FloatingActionButton floatingActionButton;
+    private IModel<Todo> db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,14 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.addTodo();
+                switch (view.getId()) {
+                    case R.id.floatingActionButton:
+                        presenter.addTodo();
+                        break;
+                }
             }
         });
 
-        //ITodoService todoService = TodoService.gettodoService();
         presenter = new Presenter(this, new TodoDB(this));
         adapter = new RecyclerAdapter(presenter);
 
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
         intent.putExtra("NAME", presenter.getTodos().get(position).getName());
         intent.putExtra("CONTENT", presenter.getTodos().get(position).getContents());
         intent.putExtra("DUE DATE", presenter.getTodos().get(position).getDueDate());
+        intent.putExtra("ID", presenter.getTodos().get(position).id);
         intent.putExtra("START_REASON", Constants.EDIT_TODO_REQUEST_CODE);
         startActivityForResult(intent, Constants.EDIT_TODO_REQUEST_CODE);
     }
@@ -101,20 +107,9 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     @Override
     public void refreshTodos(List<Todo> all) {
         if(all != null) {
-            // replace the existing list
             adapter.setTodos(all);
         } else {
-            // just tell the adapter that something has changed
             adapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.add_todo_button:
-                presenter.addTodo();
-                break;
         }
     }
 
@@ -144,9 +139,10 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
             String duedateEdit = data.getStringExtra("DUE DATEI");
             SharedPreferences bb = getSharedPreferences("my_prefs", 0);
             int pos = bb.getInt("POS", 0);
-            Todo todo = new Todo(nameEdit,contentEdit,duedateEdit);
-            ITodoService todoService = TodoService.gettodoService();
-            todoService.UpdateTodo(todo, pos);
+
+//            Todo todo = new Todo(nameEdit,contentEdit,duedateEdit);
+//            ITodoService todoService = TodoService.gettodoService();
+//            todoService.UpdateTodo(todo, pos);
             handleEdit(pos);
         }
     }
