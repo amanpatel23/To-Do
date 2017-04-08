@@ -3,12 +3,12 @@ package com.example.aman.to_doapp.presenters;
 import android.content.Intent;
 
 import com.example.aman.to_doapp.Constants;
+import com.example.aman.to_doapp.R;
 import com.example.aman.to_doapp.interfaces.IEditPresenter;
-import com.example.aman.to_doapp.interfaces.IModel;
 import com.example.aman.to_doapp.interfaces.IEditView;
+import com.example.aman.to_doapp.interfaces.IModel;
 import com.example.aman.to_doapp.models.Todo;
 import com.example.aman.to_doapp.viewmodels.EditTodoViewModel;
-import com.example.aman.to_doapp.R;
 
 /**
  * Created by Aman on 2/15/17.
@@ -47,7 +47,6 @@ public class EditTodoPresenter implements IEditPresenter {
         view.updateViewWithViewModel(viewModel);
     }
 
-
     @Override
     public void updateTodoDueDate(String text) {
         viewModel.dueDate = text;
@@ -65,12 +64,8 @@ public class EditTodoPresenter implements IEditPresenter {
 
     @Override
     public void saveTodo(Todo todo) {
-        db.edit(todo);
+        db.edit(todo, db.getTodos().get(0).id);
         Intent intent = new Intent();
-//        intent.putExtra("NAMEI", name);
-//        intent.putExtra("CONTENTI", content);
-//        intent.putExtra("DUE DATEI", dueDate);
-//
         view.sendTodoBack(intent);
     }
 

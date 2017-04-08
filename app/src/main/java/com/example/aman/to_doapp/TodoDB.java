@@ -68,9 +68,9 @@ public class TodoDB implements IModel<Todo> {
     }
 
     @Override
-    public void edit(Todo todo) {
+    public void edit(Todo todo, UUID a) {
         ContentValues contentValues = makeCV(todo);
-        todo.id = UUID.randomUUID();
+        todo.id = a;
         db.update(TABLE_NAME, contentValues, ID + " = ?", new String[]{todo.id.toString()});
     }
 

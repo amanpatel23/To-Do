@@ -34,19 +34,20 @@ public class Presenter implements IPresenter {
     @Override
     public void handleClick(int adapterPosition) {
         view.showEditView(adapterPosition);
-        db.edit(getTodos().get(adapterPosition));
+        view.refreshTodos(db.getTodos());
+        db.edit(getTodos().get(adapterPosition), getTodos().get(adapterPosition).id);
     }
 
     @Override
     public void handleLongPress(int position) {
         view.handleDelete(position);
         removeTodo(db.getTodos().get(position));
+        view.refreshTodos(db.getTodos());
     }
 
     @Override
     public void removeTodo(Todo todo) {
         db.delete(todo);
-        view.refreshTodos(db.getTodos());
     }
 
     @Override

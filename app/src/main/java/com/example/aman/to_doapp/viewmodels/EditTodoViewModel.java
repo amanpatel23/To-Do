@@ -2,6 +2,8 @@ package com.example.aman.to_doapp.viewmodels;
 
 import android.content.Intent;
 
+import java.util.UUID;
+
 /**
  * Created by Aman on 2/15/17.
  */
@@ -11,6 +13,7 @@ public class EditTodoViewModel {
     public String name;
     public String content;
     public String dueDate;
+    public UUID id;
 
 
     public boolean validate() {

@@ -85,15 +85,14 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
         intent.putExtra("NAME", presenter.getTodos().get(position).getName());
         intent.putExtra("CONTENT", presenter.getTodos().get(position).getContents());
         intent.putExtra("DUE DATE", presenter.getTodos().get(position).getDueDate());
-        intent.putExtra("ID", presenter.getTodos().get(position).id);
         intent.putExtra("START_REASON", Constants.EDIT_TODO_REQUEST_CODE);
         startActivityForResult(intent, Constants.EDIT_TODO_REQUEST_CODE);
     }
 
 
     @Override
-    public void handleAdd(int i) {
-        adapter.notifyItemInserted(i);
+    public void handleAdd(int position) {
+        adapter.notifyItemInserted(position);
         adapter.notifyDataSetChanged();
         recyclerView.scrollToPosition(presenter.getTodos().size()-1);
     }
@@ -133,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
         }
 
         if(requestCode == 2 && resultCode == RESULT_OK) {
-
             String nameEdit = data.getStringExtra("NAMEI");
             String contentEdit = data.getStringExtra("CONTENTI");
             String duedateEdit = data.getStringExtra("DUE DATEI");

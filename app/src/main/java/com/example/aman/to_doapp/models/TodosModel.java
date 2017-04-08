@@ -4,6 +4,7 @@ import com.example.aman.to_doapp.interfaces.IModel;
 import com.example.aman.to_doapp.interfaces.ITodoService;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Aman on 2/15/17.
@@ -39,7 +40,7 @@ public class TodosModel implements IModel {
     }
 
     @Override
-    public void edit(Object o) {
+    public void edit(Object o, UUID a) {
 
     }
 

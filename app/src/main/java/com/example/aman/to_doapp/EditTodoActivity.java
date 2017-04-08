@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.aman.to_doapp.adapters.RecyclerAdapter;
 import com.example.aman.to_doapp.interfaces.IEditPresenter;
 import com.example.aman.to_doapp.interfaces.IEditView;
 import com.example.aman.to_doapp.models.Todo;
@@ -25,6 +26,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
 
     // presenter
     IEditPresenter presenter;
+    RecyclerAdapter recyclerAdapter;
 
     // widgets
     TextView nameTv;
@@ -38,7 +40,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_todo_layout);
-
         bindView();
 
         presenter = new EditTodoPresenter(this, new TodoDB(this));
