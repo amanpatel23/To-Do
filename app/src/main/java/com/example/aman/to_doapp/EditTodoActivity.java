@@ -18,6 +18,8 @@ import com.example.aman.to_doapp.models.Todo;
 import com.example.aman.to_doapp.presenters.EditTodoPresenter;
 import com.example.aman.to_doapp.viewmodels.EditTodoViewModel;
 
+import java.util.UUID;
+
 /**
  * Created by Aman on 2/15/17.
  */
@@ -54,7 +56,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         dueDateEt = (EditText)findViewById(R.id.dueDateEditText);
         viewModelTv = (TextView)findViewById(R.id.debug_model);
         saveBtn = (Button)findViewById(R.id.save_button);
-
+        Intent intent = new Intent();
         saveBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,7 +64,7 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 String name = nameEt.getText().toString();
                 String content = contentEt.getText().toString();
                 String dueDate = dueDateEt.getText().toString();
-                Todo todo = new Todo(name, content, dueDate);
+                Todo todo = new Todo(name, content, dueDate, UUID.randomUUID());
                 presenter.saveTodo(todo);
 
           }
@@ -135,16 +137,6 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
                 +  ", Due Date: " + vm.dueDate);
     }
 
-
-    @Override
-    public void returnResult(EditTodoViewModel viewModel) {
-        Intent intent = viewModel.makeIntent();
-        Todo todo = new Todo(viewModel.name, viewModel.content, viewModel.dueDate);
-        presenter.saveTodo(todo);
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
     @Override
     public void displayInvalid(EditTodoViewModel viewModel) {
         viewModelTv.setText("Input is not valid");
@@ -155,6 +147,15 @@ public class EditTodoActivity extends AppCompatActivity implements IEditView, Vi
         nameEt.setText(viewModel.name);
         contentEt.setText(viewModel.content);
         dueDateEt.setText(viewModel.dueDate);
+    }
+
+    @Override
+    public void returnResult(EditTodoViewModel viewModel) {
+        Intent intent = viewModel.makeIntent();
+        Todo todo = new Todo(viewModel.name, viewModel.content, viewModel.dueDate, UUID.randomUUID());
+        presenter.saveTodo(todo);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override

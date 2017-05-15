@@ -18,10 +18,11 @@ public class Todo {
     public Todo() {}
 
 
-    public Todo(String name, String contents, String dueDate){
+    public Todo(String name, String contents, String dueDate, UUID id){
         this.name = name;
         this.contents = contents;
         this.dueDate = dueDate;
+        this.id = id;
     }
 
     public String toString() {
@@ -52,6 +53,14 @@ public class Todo {
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public UUID getID() {
+        return id;
+    }
+
+    public void setID(String id) {
+        this.id = UUID.fromString(id);
     }
 
 

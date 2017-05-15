@@ -2,6 +2,8 @@ package com.example.aman.to_doapp.Mocks;
 
 import com.example.aman.to_doapp.models.Todo;
 
+import java.util.List;
+
 /**
  * Created by Aman on 2/20/17.
  */
@@ -34,6 +36,11 @@ public class MockView implements com.example.aman.to_doapp.interfaces.IView {
 
     @Override
     public void handleEdit(int position) {
+
+    }
+
+    @Override
+    public void refreshTodos(List<Todo> all) {
 
     }
 }

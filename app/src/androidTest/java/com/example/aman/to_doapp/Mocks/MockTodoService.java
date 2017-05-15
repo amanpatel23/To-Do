@@ -25,7 +25,8 @@ public class MockTodoService implements ITodoService {
     }
 
     @Override
-    public void UpdateTodo(Todo todo) {
+    public void UpdateTodo(Todo todo, int position) {
 
     }
+
 }

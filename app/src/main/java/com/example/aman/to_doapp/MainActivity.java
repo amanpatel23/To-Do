@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements IView,  CompoundB
                 String nameAdd = data.getStringExtra("NAMEI");
                 String contentAdd = data.getStringExtra("CONTENTI");
                 String duedateAdd = data.getStringExtra("DUE DATEI");
-                Todo todo = new Todo(nameAdd,contentAdd,duedateAdd);
+                Todo todo = new Todo();
                 ITodoService todoService = TodoService.gettodoService();
                 todoService.addTodo(todo);
                 handleAdd(0);

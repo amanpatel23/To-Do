@@ -31,4 +31,19 @@ public class MockPresenter implements IPresenter {
     public void handleAddClick() {
 
     }
+
+    @Override
+    public void addTodo() {
+
+    }
+
+    @Override
+    public void finish() {
+
+    }
+
+    @Override
+    public void removeTodo(Todo todo) {
+
+    }
 }
